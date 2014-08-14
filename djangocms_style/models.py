@@ -61,7 +61,7 @@ class Style(CMSPlugin):
         if self.padding_right:
             style += "padding-right: %dpx; " % self.padding_right
         if self.padding_bottom:
-            style += "padding-bottom: %dpx; " % self.padding_right
+            style += "padding-bottom: %dpx; " % self.padding_bottom
         if self.padding_top:
             style += "padding-top: %dpx; " % self.padding_top
         if self.margin_left:
