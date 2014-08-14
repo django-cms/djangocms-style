@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# daeyong <daeyong@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: django-cms\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-14 14:09+0100\n"
+"PO-Revision-Date: 2014-02-06 13:31+0000\n"
+"Last-Translator: daeyong <daeyong@gmail.com>\n"
+"Language-Team: Korean (Korea) (http://www.transifex.com/projects/p/django-cms/language/ko_KR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ko_KR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: cms_plugins.py:9
+msgid "Style"
+msgstr "스타일"
+
+#: cms_plugins.py:17
+msgid "Padding"
+msgstr "패딩"
+
+#: cms_plugins.py:21
+msgid "Margin"
+msgstr "여백"
+
+#: models.py:7
+msgid "info"
+msgstr "정보"
+
+#: models.py:8
+msgid "new"
+msgstr "새로 만들기"
+
+#: models.py:9
+msgid "hint"
+msgstr "힌트"
+
+#: models.py:17
+msgid "class name"
+msgstr "클래스 이름"
+
+#: models.py:19 models.py:24
+msgid "left"
+msgstr "왼쪽"
+
+#: models.py:20 models.py:25
+msgid "right"
+msgstr "오른쪽"
+
+#: models.py:21 models.py:26
+msgid "top"
+msgstr "위"
+
+#: models.py:22 models.py:27
+msgid "bottom"
+msgstr "아래"

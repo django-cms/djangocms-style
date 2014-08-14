@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: django-cms\n"
-"Report-Msgid-Bugs-To: https://github.com/divio/django-cms/issues\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-14 14:09+0100\n"
-"PO-Revision-Date: 2013-04-29 08:58+0000\n"
+"PO-Revision-Date: 2014-02-06 13:31+0000\n"
 "Last-Translator: Patrick Lauber <patrick.lauber@divio.ch>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/django-cms/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -55,8 +55,8 @@ msgstr "дясно"
 
 #: models.py:21 models.py:26
 msgid "top"
-msgstr ""
+msgstr "начало"
 
 #: models.py:22 models.py:27
 msgid "bottom"
-msgstr ""
+msgstr "дъно"
