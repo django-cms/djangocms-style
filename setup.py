@@ -5,7 +5,6 @@ from djangocms_style import __version__
 
 
 INSTALL_REQUIRES = [
-
 ]
 
 CLASSIFIERS = [
@@ -21,6 +20,7 @@ CLASSIFIERS = [
     'Topic :: Internet :: WWW/HTTP :: Dynamic Content :: Message Boards',
     'Programming Language :: Python :: 2.6',
     'Programming Language :: Python :: 2.7',
+    'Programming Language :: Python :: 3.4',
 ]
 
 setup(

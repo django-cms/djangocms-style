@@ -1,5 +1,6 @@
 from cms.models import CMSPlugin
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
@@ -12,6 +13,7 @@ CLASS_NAMES = getattr(settings, "CMS_STYLE_NAMES", (
 )
 
 
+@python_2_unicode_compatible
 class Style(CMSPlugin):
     """
     A CSS Style Plugin
@@ -50,7 +52,7 @@ class Style(CMSPlugin):
         help_text=_('Comma separated list of additional classes to apply to tag_type')
     )
 
-    def __unicode__(self):
+    def __str__(self):
         display = self.get_class_name_display() or self.tag_type or u''
         return u"%s" % display
 
@@ -80,4 +82,3 @@ class Style(CMSPlugin):
             # Removes any extra spaces
             return ' '.join((html_class.strip() for html_class in self.additional_classes.split(',')))
         return ''
-
