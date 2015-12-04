@@ -26,11 +26,10 @@ class Style(CMSPlugin):
     SECTION_TAG = 'section'
 
     HTML_TAG_TYPES = getattr(settings, "CMS_STYLE_TAG_TYPES", (
-            (DIV_TAG, _('div')),
-            (ARTICLE_TAG, _('article')),
-            (SECTION_TAG, _('section')),
-        )
-    )
+        (DIV_TAG, _('div')),
+        (ARTICLE_TAG, _('article')),
+        (SECTION_TAG, _('section')),
+    ))
 
     cmsplugin_ptr = models.OneToOneField(
         CMSPlugin, related_name='+', parent_link=True)
