@@ -1,53 +1,35 @@
 # -*- coding: utf-8 -*-
-import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
 
+from django.db import models, migrations
+from djangocms_style.models import CLASS_NAMES, Style
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Style'
-        db.create_table('cmsplugin_style', (
-            ('cmsplugin_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['cms.CMSPlugin'], unique=True, primary_key=True)),
-            ('class_name', self.gf('django.db.models.fields.CharField')(default='info', max_length=50)),
-        ))
-        db.send_create_signal('djangocms_style', ['Style'])
+    dependencies = [
+        ('cms', '__first__'),
+    ]
 
-
-    def backwards(self, orm):
-        # Deleting model 'Style'
-        db.delete_table('cmsplugin_style')
-
-
-    models = {
-        'cms.cmsplugin': {
-            'Meta': {'object_name': 'CMSPlugin'},
-            'changed_date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'creation_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 12, 6, 0, 0)'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'language': ('django.db.models.fields.CharField', [], {'max_length': '15', 'db_index': 'True'}),
-            'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cms.CMSPlugin']", 'null': 'True', 'blank': 'True'}),
-            'placeholder': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['cms.Placeholder']", 'null': 'True'}),
-            'plugin_type': ('django.db.models.fields.CharField', [], {'max_length': '50', 'db_index': 'True'}),
-            'position': ('django.db.models.fields.PositiveSmallIntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'})
-        },
-        'cms.placeholder': {
-            'Meta': {'object_name': 'Placeholder'},
-            'default_width': ('django.db.models.fields.PositiveSmallIntegerField', [], {'null': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'slot': ('django.db.models.fields.CharField', [], {'max_length': '50', 'db_index': 'True'})
-        },
-        'djangocms_style.style': {
-            'Meta': {'object_name': 'Style', 'db_table': "'cmsplugin_style'", '_ormbases': ['cms.CMSPlugin']},
-            'class_name': ('django.db.models.fields.CharField', [], {'default': "'info'", 'max_length': '50'}),
-            'cmsplugin_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['cms.CMSPlugin']", 'unique': 'True', 'primary_key': 'True'})
-        }
-    }
-
-    complete_apps = ['djangocms_style']
+    operations = [
+        migrations.CreateModel(
+            name='Style',
+            fields=[
+                ('cmsplugin_ptr', models.OneToOneField(serialize=False, related_name='+', parent_link=True, to='cms.CMSPlugin', primary_key=True)),
+                ('class_name', models.CharField(blank=True, max_length=50, choices=CLASS_NAMES, verbose_name='class name', null=True, default=CLASS_NAMES[0][0])),
+                ('tag_type', models.CharField(verbose_name='tag Type', default=Style.HTML_TAG_TYPES[0][0], max_length=50, choices=Style.HTML_TAG_TYPES)),
+                ('padding_left', models.SmallIntegerField(verbose_name='padding left', blank=True, null=True)),
+                ('padding_right', models.SmallIntegerField(verbose_name='padding right', blank=True, null=True)),
+                ('padding_top', models.SmallIntegerField(verbose_name='padding top', blank=True, null=True)),
+                ('padding_bottom', models.SmallIntegerField(verbose_name='padding bottom', blank=True, null=True)),
+                ('margin_left', models.SmallIntegerField(verbose_name='margin left', blank=True, null=True)),
+                ('margin_right', models.SmallIntegerField(verbose_name='margin right', blank=True, null=True)),
+                ('margin_top', models.SmallIntegerField(verbose_name='margin top', blank=True, null=True)),
+                ('margin_bottom', models.SmallIntegerField(verbose_name='margin bottom', blank=True, null=True)),
+                ('additional_classes', models.CharField(help_text='Comma separated list of additional classes to apply to tag_type', blank=True, max_length=200, verbose_name='additional clases')),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=('cms.cmsplugin',),
+        ),
+    ]
