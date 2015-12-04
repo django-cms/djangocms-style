@@ -4,11 +4,6 @@ from setuptools import setup
 from djangocms_style import __version__
 
 
-INSTALL_REQUIRES = [
-    'django>=1.6',
-    'django-cms>=3.0',
-]
-
 CLASSIFIERS = [
     'Development Status :: 5 - Production/Stable',
     'Environment :: Web Environment',
@@ -37,7 +32,10 @@ setup(
         'djangocms_style.migrations',
         'djangocms_style.south_migrations'
     ],
-    install_requires=INSTALL_REQUIRES,
+    install_requires=[
+        'django>=1.6',
+        'django-cms>=3.0',
+    ],
     license='LICENSE.txt',
     platforms=['OS Independent'],
     classifiers=CLASSIFIERS,
