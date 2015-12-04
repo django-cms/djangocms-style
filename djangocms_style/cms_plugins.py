@@ -1,8 +1,12 @@
+# -*- coding: utf-8 -*-
+
+from django.utils.translation import ugettext_lazy as _
+
 from cms.plugin_pool import plugin_pool
 from cms.plugin_base import CMSPluginBase
-from django.utils.translation import ugettext_lazy as _
-from cms.models import CMSPlugin
+
 from djangocms_style.models import Style
+
 
 class StylePlugin(CMSPluginBase):
     model = Style
@@ -19,7 +23,8 @@ class StylePlugin(CMSPluginBase):
             'fields': (
                 'tag_type',
                 'additional_classes',
-                ('padding_left', 'padding_right', 'padding_top', 'padding_bottom'),
+                ('padding_left', 'padding_right', 'padding_top',
+                 'padding_bottom'),
                 ('margin_left', 'margin_right', 'margin_top', 'margin_bottom'),
             ),
         }),
