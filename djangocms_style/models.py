@@ -9,11 +9,10 @@ from cms.models import CMSPlugin
 
 
 CLASS_NAMES = getattr(settings, "CMS_STYLE_NAMES", (
-        ('info', _("info")),
-        ('new', _("new")),
-        ('hint', _("hint"))
-    )
-)
+    ('info', _("info")),
+    ('new', _("new")),
+    ('hint', _("hint"))
+))
 
 
 @python_2_unicode_compatible
