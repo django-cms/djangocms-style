@@ -31,8 +31,13 @@ class Style(CMSPlugin):
         (SECTION_TAG, _('section')),
     ))
 
+    # Add an app namespace to related_name to avoid field name clashes
+    # with any other plugins that have a field with the same name as the
+    # lowercase of the class name of this model.
+    # https://github.com/divio/django-cms/issues/5030
     cmsplugin_ptr = models.OneToOneField(
-        CMSPlugin, related_name='+', parent_link=True)
+        CMSPlugin, related_name='djangocms_style_style', parent_link=True)
+
     class_name = models.CharField(
         _("class name"), choices=CLASS_NAMES, default=CLASS_NAMES[0][0],
         max_length=50, blank=True, null=True)
