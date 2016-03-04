@@ -7,7 +7,7 @@ A Plugin for django CMS to add CSS classes to other plugins
 Installation
 ------------
 
-This plugin requires `django CMS` 2.4 or higher to be properly installed.
+This plugin requires `django CMS` 3.0 or higher to be properly installed.
 
 * In your projects `virtualenv`, run ``pip install djangocms-style``.
 * If using Django 1.6 and South < 1.0.2 add ``'djangocms_style': 'djangocms_style.south_migrations',``
