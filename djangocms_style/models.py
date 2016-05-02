@@ -65,7 +65,7 @@ class Style(CMSPlugin):
         _("margin bottom"), blank=True, null=True)
 
     additional_classes = models.CharField(
-        verbose_name=_('additional clases'),
+        verbose_name=_('additional classes'),
         max_length=200,
         blank=True,
         help_text=_('Comma separated list of additional classes to apply to '
