@@ -1,24 +1,25 @@
 # -*- coding: utf-8 -*-
-
 from django.utils.translation import ugettext_lazy as _
 
 from cms.plugin_pool import plugin_pool
 from cms.plugin_base import CMSPluginBase
 
-from djangocms_style.models import Style
+from .models import Style
 
 
 class StylePlugin(CMSPluginBase):
     model = Style
-    name = _("Style")
-    render_template = "cms/plugins/style.html"
+    name = _('Style')
+    render_template = 'djangocms_style/style.html'
     allow_children = True
 
     fieldsets = (
         (None, {
-            'fields': ('class_name',)
+            'fields': (
+                'class_name',
+            )
         }),
-        (_('Advanced Settings'), {
+        (_('Advanced settings'), {
             'classes': ('collapse',),
             'fields': (
                 'tag_type',
@@ -29,5 +30,6 @@ class StylePlugin(CMSPluginBase):
             ),
         }),
     )
+
 
 plugin_pool.register_plugin(StylePlugin)

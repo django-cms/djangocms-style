@@ -1,18 +1,25 @@
 # -*- coding: utf-8 -*-
-
+"""
+Enables the user to add style plugin that displays a html tag with
+the provided settings from the style plugin.
+"""
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
-from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext, ugettext_lazy as _
 
 from cms.models import CMSPlugin
 
 
-CLASS_NAMES = getattr(settings, "CMS_STYLE_NAMES", (
-    ('info', _("info")),
-    ('new', _("new")),
-    ('hint', _("hint"))
-))
+CLASS_NAMES = getattr(
+    settings,
+    'CMS_STYLE_NAMES',
+    (
+        ('info', _('info')),
+        ('new', _('new')),
+        ('hint', _('hint'))
+    )
+)
 
 
 @python_2_unicode_compatible
@@ -25,7 +32,7 @@ class Style(CMSPlugin):
     ARTICLE_TAG = 'article'
     SECTION_TAG = 'section'
 
-    HTML_TAG_TYPES = getattr(settings, "CMS_STYLE_TAG_TYPES", (
+    HTML_TAG_TYPES = getattr(settings, 'CMS_STYLE_TAG_TYPES', (
         (DIV_TAG, _('div')),
         (ARTICLE_TAG, _('article')),
         (SECTION_TAG, _('section')),
@@ -36,40 +43,75 @@ class Style(CMSPlugin):
     # lowercase of the class name of this model.
     # https://github.com/divio/django-cms/issues/5030
     cmsplugin_ptr = models.OneToOneField(
-        CMSPlugin, related_name='djangocms_style_style', parent_link=True)
+        CMSPlugin,
+        related_name='%(app_label)s_%(class)s',
+        parent_link=True,
+    )
 
     class_name = models.CharField(
-        _("class name"), choices=CLASS_NAMES, default=CLASS_NAMES[0][0],
-        max_length=50, blank=True, null=True)
+        _("class name"),
+        choices=CLASS_NAMES,
+        default=CLASS_NAMES[0][0],
+        max_length=50,
+        blank=True,
+        null=True,
+    )
 
     tag_type = models.CharField(
-        verbose_name=_('tag Type'), max_length=50, choices=HTML_TAG_TYPES,
-        default=HTML_TAG_TYPES[0][0])
+        verbose_name=_('tag Type'),
+        max_length=50,
+        choices=HTML_TAG_TYPES,
+        default=HTML_TAG_TYPES[0][0],
+    )
 
     padding_left = models.SmallIntegerField(
-        _("padding left"), blank=True, null=True)
+        _("padding left"),
+        blank=True,
+        null=True,
+    )
     padding_right = models.SmallIntegerField(
-        _("padding right"), blank=True, null=True)
+        _("padding right"),
+        blank=True,
+        null=True,
+    )
     padding_top = models.SmallIntegerField(
-        _("padding top"), blank=True, null=True)
+        _("padding top"),
+        blank=True,
+        null=True,
+    )
     padding_bottom = models.SmallIntegerField(
-        _("padding bottom"), blank=True, null=True)
+        _("padding bottom"),
+        blank=True,
+        null=True,
+    )
 
     margin_left = models.SmallIntegerField(
-        _("margin left"), blank=True, null=True)
+        _("margin left"),
+        blank=True,
+        null=True,
+    )
     margin_right = models.SmallIntegerField(
-        _("margin right"), blank=True, null=True)
+        _("margin right"),
+        blank=True,
+        null=True,
+    )
     margin_top = models.SmallIntegerField(
-        _("margin top"), blank=True, null=True)
+        _("margin top"),
+        blank=True,
+        null=True,
+    )
     margin_bottom = models.SmallIntegerField(
-        _("margin bottom"), blank=True, null=True)
+        _("margin bottom"),
+        blank=True,
+        null=True,
+    )
 
     additional_classes = models.CharField(
         verbose_name=_('additional classes'),
         max_length=200,
         blank=True,
         help_text=_('Comma separated list of additional classes to apply to '
-                    'tag_type')
+                    'tag_type'),
     )
 
     def __str__(self):

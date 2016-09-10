@@ -1,7 +1,31 @@
-djangocms-style
-===============
+============
+django Style
+============
 
 A Plugin for django CMS to add CSS classes to other plugins
+
+
+
+djangocms-style
+- label
+- class_name
+- tag_type
+- padding (top, right, bottom, left)
+- margin (top, right, bottom, left)
+- id_name
+- additional_classes
+- attributes
+
+
+
+
+
+
+
+
+
+
+
 
 
 Installation
