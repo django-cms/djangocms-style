@@ -1,6 +1,18 @@
 {% load cms_tags %}
-<{{ instance.tag_type }}{% if instance.class_name %} class="{{ instance.class_name }}{% if instance.additional_classes %} {{ instance.get_additional_classes }}{% endif %}"{% endif %}{% if instance.inline_style %} style="{{ instance.inline_style }}"{% endif %}>
+<{{ instance.tag_type }}{% if instance.class_name %} class="{{ instance.class_name }}{% if instance.additional_classes %} {{ instance.get_additional_classes }}{% endif %}"{% endif %}{% if inline_styles %} style="{{ inline_styles }}"{% endif %}>
 {% for plugin in instance.child_plugin_instances %}
     	{% render_plugin plugin %}
 {% endfor %}
 </{{ instance.tag_type }}>
+
+
+
+
+{% load cms_tags %}
+{% spaceless %}
+<{{ instance.tag_type }}{% if instance.id_name %} id="{{ instance.id_name }}"{% endif %} class="{% if instance.class_name %}{{ instance.class_name }}{% endif %}{% if instance.class_name and instance.additional_class_names %} {% endif %}{% if instance.additional_class_names %}{{ instance.get_additional_class_names }}{% endif %}"{% if instance.inline_style %} style="{{ instance.inline_style }}"{% endif %}>
+{% for plugin in instance.child_plugin_instances %}
+	{% render_plugin plugin %}
+{% endfor %}
+</{{ instance.tag_type }}>
+{% endspaceless %}

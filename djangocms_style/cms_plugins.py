@@ -16,20 +16,32 @@ class StylePlugin(CMSPluginBase):
     fieldsets = (
         (None, {
             'fields': (
-                'class_name',
+                'label',
+                ('class_name', 'tag_type'),
             )
         }),
         (_('Advanced settings'), {
             'classes': ('collapse',),
             'fields': (
-                'tag_type',
                 'additional_classes',
-                ('padding_left', 'padding_right', 'padding_top',
-                 'padding_bottom'),
-                ('margin_left', 'margin_right', 'margin_top', 'margin_bottom'),
+                'id_name',
+                'attributes',
+            ),
+        }),
+        (_('Inline style settings'), {
+            'classes': ('collapse',),
+            'fields': (
+                ('padding_top', 'padding_right',
+                 'padding_bottom', 'padding_left'),
+                ('margin_top', 'margin_right',
+                 'margin_bottom', 'margin_left'),
             ),
         }),
     )
+
+    def render(self, context, instance, placeholder):
+        context['inline_styles'] = instance.get_styles()
+        return super(StylePlugin, self).render(context, instance, placeholder)
 
 
 plugin_pool.register_plugin(StylePlugin)
