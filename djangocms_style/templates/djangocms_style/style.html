@@ -2,8 +2,10 @@
 
 <{{ instance.tag_type }}
     {% if instance.id_name %} id="{{ instance.id_name }}"{% endif %}
-    {% if instance.class_name %} class="{{ instance.class_name }}
-    {% if instance.additional_classes %} {{ instance.get_additional_classes }}{% endif %}"{% endif %}
+    {% if instance.class_name or instance.additional_classes %}class="
+        {{ instance.class_name }}
+        {{ instance.get_additional_classes }}
+    "{% endif %}
     {% if inline_styles %} style="{{ inline_styles }}"{% endif %}
     {{ instance.attributes_str }}>
     {% for plugin in instance.child_plugin_instances %}

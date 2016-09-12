@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='style',
             name='additional_classes',
-            field=models.CharField(help_text='Additional comma separated list of classes to be added to the element.', max_length=255, verbose_name='Additional classes', blank=True),
+            field=models.CharField(help_text='Additional comma separated list of classes to be added to the element e.g. "row, column-12, clearfix".', max_length=255, verbose_name='Additional classes', blank=True),
         ),
         migrations.AlterField(
             model_name='style',
@@ -81,6 +81,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='style',
             name='tag_type',
-            field=models.CharField(default='div', max_length=255, verbose_name='Tag type', choices=[('div', 'div'), ('article', 'article'), ('section', 'section'), ('header', 'header'), ('footer', 'footer'), ('hi', 'hi'), ('h2', 'h2'), ('h3', 'h3'), ('h4', 'h4'), ('h5', 'h5'), ('h6', 'h6')]),
+            field=models.CharField(default='div', max_length=255, verbose_name='Tag type', choices=[('div', 'div'), ('article', 'article'), ('section', 'section'), ('header', 'header'), ('footer', 'footer'), ('aside', 'aside'), ('hi', 'hi'), ('h2', 'h2'), ('h3', 'h3'), ('h4', 'h4'), ('h5', 'h5'), ('h6', 'h6')]),
         ),
     ]

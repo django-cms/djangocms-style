@@ -27,7 +27,7 @@ CLASS_CHOICES = getattr(
 TAG_CHOICES = getattr(
     settings,
     'DJANGOCMS_STYLE_TAGS',
-    ['div', 'article', 'section', 'header', 'footer',
+    ['div', 'article', 'section', 'header', 'footer', 'aside',
      'hi', 'h2', 'h3', 'h4', 'h5', 'h6'],
 )
 
@@ -81,7 +81,7 @@ class Style(CMSPlugin):
         blank=True,
         max_length=255,
         help_text=_('Additional comma separated list of classes '
-            'to be added to the element.'),
+            'to be added to the element e.g. "row, column-12, clearfix".'),
     )
     id_name = models.CharField(
         verbose_name=_('ID name'),
@@ -94,43 +94,43 @@ class Style(CMSPlugin):
         excluded_keys=['class', 'id', 'style'],
     )
 
-    padding_top = models.SmallIntegerField(
+    padding_top = models.PositiveSmallIntegerField(
         verbose_name=_('Padding top'),
         blank=True,
         null=True,
     )
-    padding_right = models.SmallIntegerField(
+    padding_right = models.PositiveSmallIntegerField(
         verbose_name=_('Padding right'),
         blank=True,
         null=True,
     )
-    padding_bottom = models.SmallIntegerField(
+    padding_bottom = models.PositiveSmallIntegerField(
         verbose_name=_('Padding bottom'),
         blank=True,
         null=True,
     )
-    padding_left = models.SmallIntegerField(
+    padding_left = models.PositiveSmallIntegerField(
         verbose_name=_('Padding left'),
         blank=True,
         null=True,
     )
 
-    margin_top = models.SmallIntegerField(
+    margin_top = models.PositiveSmallIntegerField(
         verbose_name=_('Margin top'),
         blank=True,
         null=True,
     )
-    margin_right = models.SmallIntegerField(
+    margin_right = models.PositiveSmallIntegerField(
         verbose_name=_('Margin right'),
         blank=True,
         null=True,
     )
-    margin_bottom = models.SmallIntegerField(
+    margin_bottom = models.PositiveSmallIntegerField(
         verbose_name=_('Margin bottom'),
         blank=True,
         null=True,
     )
-    margin_left = models.SmallIntegerField(
+    margin_left = models.PositiveSmallIntegerField(
         verbose_name=_('Margin left'),
         blank=True,
         null=True,
