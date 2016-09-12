@@ -42,12 +42,14 @@ if hasattr(settings, 'CMS_STYLE_TAG_TYPES'):
 CLASS_NAME_FORMAT = re.compile(r'^\w[\w_-]*$')
 TAG_TYPE_FORMAT = re.compile(r'\w[\w\d]*$')
 
+# convert into correct choice type
 def get_choices(choice):
     if isinstance(choice, list):
         return tuple((entry, entry) for entry in choice)
     elif isinstance(choice, tuple):
         return choice
     return ()
+
 
 @python_2_unicode_compatible
 class Style(CMSPlugin):
@@ -58,8 +60,7 @@ class Style(CMSPlugin):
         verbose_name=_('Label'),
         blank=True,
         max_length=255,
-        help_text=_('Used to show additional information '
-            'inside the structure mode.'),
+        help_text=_('Overrides the display name in the structure mode.'),
     )
     tag_type = models.CharField(
         verbose_name=_('Tag type'),
@@ -151,9 +152,13 @@ class Style(CMSPlugin):
     def get_short_description(self):
         display = self.tag_type or ''
         if self.label:
-            display = '{0}: {1}'.format(display, self.label)
-        if self.class_name:
-            display = '{0}: {1}'.format(display, self.class_name)
+            display = '<{0}> {1}'.format(display, self.label)
+        elif self.class_name:
+            display = '<{0}> .{1}'.format(display, self.class_name)
+        if self.additional_classes:
+            display = '{0} [{1}]'.format(display, self.get_additional_classes)
+        if self.id_name:
+            display = '{0} #{1}'.format(display, self.id_name)
         return display
 
     def get_styles(self):
@@ -179,19 +184,24 @@ class Style(CMSPlugin):
         return ' '.join(styles)
 
     def clean(self):
+        # validate for correct class name settings
         if self.additional_classes:
             additional_classes = list(
-                html_class.strip() for html_class in
-                self.additional_classes.split(','))
+                html_class.strip() for html_class in self.additional_classes.split(',')
+            )
             for class_name in additional_classes:
                 class_name = class_name.strip()
                 if not CLASS_NAME_FORMAT.match(class_name):
                     raise ValidationError(
-                        _('"{0}" is not a proper css class name.').format(
-                            class_name)
+                        _('"{name}" is not a proper CSS class name.').format(name=class_name)
                     )
-            self.additional_classes = ', '.join(
-                set(additional_classes))
+            self.additional_classes = ', '.join(set(additional_classes))
+        # validate for correct tag type settings
+        if self.tag_type:
+            if not TAG_TYPE_FORMAT.match(self.tag_type):
+                raise ValidationError(
+                    _('"{name}" is not a proper HTML tag.').format(name=self.tag_type)
+                )
 
     @property
     def get_additional_classes(self):

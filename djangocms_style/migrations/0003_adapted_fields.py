@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='style',
             name='label',
-            field=models.CharField(help_text='Used to show additional information inside the structure mode.', max_length=255, verbose_name='Label', blank=True),
+            field=models.CharField(help_text='Overrides the display name in the structure mode.', max_length=255, verbose_name='Label', blank=True),
         ),
         migrations.AlterField(
             model_name='style',

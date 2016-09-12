@@ -1,18 +1,24 @@
 {% load cms_tags %}
-<{{ instance.tag_type }}{% if instance.class_name %} class="{{ instance.class_name }}{% if instance.additional_classes %} {{ instance.get_additional_classes }}{% endif %}"{% endif %}{% if inline_styles %} style="{{ inline_styles }}"{% endif %}>
-{% for plugin in instance.child_plugin_instances %}
-    	{% render_plugin plugin %}
-{% endfor %}
+
+<{{ instance.tag_type }}
+    {% if instance.id_name %} id="{{ instance.id_name }}"{% endif %}
+    {% if instance.class_name %} class="{{ instance.class_name }}
+    {% if instance.additional_classes %} {{ instance.get_additional_classes }}{% endif %}"{% endif %}
+    {% if inline_styles %} style="{{ inline_styles }}"{% endif %}
+    {{ instance.attributes_str }}>
+    {% for plugin in instance.child_plugin_instances %}
+        	{% render_plugin plugin %}
+    {% endfor %}
 </{{ instance.tag_type }}>
 
-
-
-
-{% load cms_tags %}
-{% spaceless %}
-<{{ instance.tag_type }}{% if instance.id_name %} id="{{ instance.id_name }}"{% endif %} class="{% if instance.class_name %}{{ instance.class_name }}{% endif %}{% if instance.class_name and instance.additional_class_names %} {% endif %}{% if instance.additional_class_names %}{{ instance.get_additional_class_names }}{% endif %}"{% if instance.inline_style %} style="{{ instance.inline_style }}"{% endif %}>
-{% for plugin in instance.child_plugin_instances %}
-	{% render_plugin plugin %}
-{% endfor %}
-</{{ instance.tag_type }}>
-{% endspaceless %}
+{% comment %}
+    # Available variables:
+    {{ instance.label }}
+    {{ instance.tag_type }}
+    {{ instance.class_name }}
+    {{ instance.additional_classes }} or {{ instance.get_additional_classes }}
+    {{ instance.id_name }}
+    {{ instance.attributes_str }}
+    {{ instance.padding_top|right|bottom|left }} or {{ inline_styles }}
+    {{ instance.margin_top|right|bottom|left }} oe {{ inline_styles }}
+{% endcomment %}

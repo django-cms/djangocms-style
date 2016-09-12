@@ -1,65 +1,101 @@
+================
+django CMS Style
+================
+
+
+|pypi| |build| |coverage|
+
+**django CMS Style** is a plugin for `django CMS <http://django-cms.org>`_
+that allows you to create a HTML container containing classes, styles, ids
+and other attributes definable through the plugins settings.
+
+This addon is compatible with `Aldryn <http://aldryn.com>`_ and is also available on the
+`django CMS Marketplace <https://marketplace.django-cms.org/en/addons/browse/djangocms-style/>`_
+for easy installation.
+
+.. image:: preview.gif
+
+
+Contributing
 ============
-django Style
-============
 
-A Plugin for django CMS to add CSS classes to other plugins
+This is a an open-source project. We'll be delighted to receive your
+feedback in the form of issues and pull requests. Before submitting your
+pull request, please review our `contribution guidelines
+<http://docs.django-cms.org/en/latest/contributing/index.html>`_.
 
-
-
-djangocms-style
-- label
-- class_name
-- tag_type
-- padding (top, right, bottom, left)
-- margin (top, right, bottom, left)
-- id_name
-- additional_classes
-- attributes
+One of the easiest contributions you can make is helping to translate this addon on
+`Transifex <https://www.transifex.com/projects/p/djangocms-style/>`_.
 
 
+Documentation
+=============
 
+See ``REQUIREMENTS`` in the `setup.py <https://github.com/divio/djangocms-style/blob/master/setup.py>`_
+file for additional dependencies:
 
-
-
-
-
-
-
-
+* Python 2.7, 3.3 or higher
+* Django 1.8 or higher
 
 
 Installation
 ------------
 
-This plugin requires `django CMS` 3.0 or higher to be properly installed.
+For a manual install:
 
-* In your projects `virtualenv`, run ``pip install djangocms-style``.
-* If using Django 1.6 and South < 1.0.2 add ``'djangocms_style': 'djangocms_style.south_migrations',``
-  to ``SOUTH_MIGRATION_MODULES``  (or define ``SOUTH_MIGRATION_MODULES`` if it
-  does not exist);
-* Add ``'djangocms_style'`` to your ``INSTALLED_APPS`` setting.
-* Run ``manage.py migrate djangocms_style``.
+* run ``pip install djangocms-style``
+* add ``djangocms_style`` to your ``INSTALLED_APPS``
+* run ``python manage.py migrate djangocms_style``
 
 
-Usage
------
+Configuration
+-------------
 
-You can define styles in your settings.py:
+django CMS Style enables you to provide a list of predefined classes to be
+displayed as first options, the default choices are: ::
 
-.. code-block:: python
+    DJANGOCMS_STYLE_CHOICES = ['container', 'content', 'teaser']
 
-    CMS_STYLE_NAMES = (
-        ('info', _("info")),
-        ('new', _("new")),
-        ('hint', _("hint")),
-    )
+You are encourage to modify that setting to your projects specifications.
 
-After that you can place other plugins inside this style plugin.
-It will create a div with a class that was prior selected around this plugin.
+The available tags can also be configured, the default choices are: ::
 
-Translations
-------------
+    DJANGOCMS_STYLE_TAGS = ['div', 'article', 'section', 'header', 'footer',
+                            'hi', 'h2', 'h3', 'h4', 'h5', 'h6']
 
-If you want to help translate the plugin please do it on transifex:
+NOTICE::
 
-https://www.transifex.com/projects/p/django-cms/resource/djangocms-style/
+    All tags included in this list should be "paired tags" that require a
+    closing tag. It does not make sense to attempt to use 'img', 'input',
+    'meta', or other self-closing tags in this setting.
+
+    Also, the developer is advised to choose the tag-types wisely to avoid HTML
+    validation issues and/or unintentional security vulnerabilities. For
+    example, the 'script' tag should never be allowed in
+    ``DJANGOCMS_STYLE_TAGS`` (though, we do not prevent this). If you have
+    an application where you find yourself wishing to do this, please see
+    djangocms-snippet as an alternative, but note these projects also come
+    with appropriate security warnings.
+
+After that you can place any number of other plugins inside this style plugin.
+It will create a div (or other tag-type) with a class that was prior selected
+around the contained plugins.
+
+
+Running Tests
+-------------
+
+You can run tests by executing::
+
+    virtualenv env
+    source env/bin/activate
+    pip install -r tests/requirements.txt
+    python setup.py test
+
+
+.. |pypi| image:: https://badge.fury.io/py/djangocms-style.svg
+    :target: http://badge.fury.io/py/djangocms-style
+.. |build| image:: https://travis-ci.org/divio/djangocms-style.svg?branch=master
+    :target: https://travis-ci.org/divio/djangocms-style
+.. |coverage| image:: https://codecov.io/gh/divio/djangocms-style/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/divio/djangocms-style
