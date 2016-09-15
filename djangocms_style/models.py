@@ -3,6 +3,8 @@
 Enables the user to add style plugin that displays a html tag with
 the provided settings from the style plugin.
 """
+from __future__ import unicode_literals
+
 import re
 import warnings
 
@@ -73,7 +75,6 @@ class Style(CMSPlugin):
         choices=get_choices(CLASS_CHOICES),
         default=get_choices(CLASS_CHOICES)[0][0],
         blank=True,
-        null=True,
         max_length=255,
     )
     additional_classes = models.CharField(

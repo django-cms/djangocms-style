@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='style',
             name='class_name',
-            field=models.CharField(default='container', choices=[('container', 'container'), ('content', 'content'), ('teaser', 'teaser')], max_length=255, blank=True, null=True, verbose_name='Class name'),
+            field=models.CharField(default='container', choices=[('container', 'container'), ('content', 'content'), ('teaser', 'teaser')], max_length=255, blank=True, verbose_name='Class name'),
         ),
         migrations.AlterField(
             model_name='style',
