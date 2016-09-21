@@ -152,10 +152,14 @@ class Style(CMSPlugin):
 
     def get_short_description(self):
         display = self.tag_type or ''
+        # display the tag correctly
         if self.label:
             display = '<{0}> {1}'.format(display, self.label)
         elif self.class_name:
             display = '<{0}> .{1}'.format(display, self.class_name)
+        else:
+            display = '<{0}>'.format(display)
+        # display additional information
         if self.additional_classes:
             display = '{0} [{1}]'.format(display, self.get_additional_classes)
         if self.id_name:
