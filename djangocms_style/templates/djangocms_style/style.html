@@ -2,14 +2,14 @@
 
 <{{ instance.tag_type }}
     {% if instance.id_name %} id="{{ instance.id_name }}"{% endif %}
-    {% if instance.class_name or instance.additional_classes %}class="
+    {% if instance.class_name or instance.additional_classes %}class="{% spaceless %}
         {{ instance.class_name }}
         {{ instance.get_additional_classes }}
-    "{% endif %}
+    {% endspaceless %}"{% endif %}
     {% if inline_styles %} style="{{ inline_styles }}"{% endif %}
     {{ instance.attributes_str }}>
     {% for plugin in instance.child_plugin_instances %}
-        	{% render_plugin plugin %}
+        {% render_plugin plugin %}
     {% endfor %}
 </{{ instance.tag_type }}>
 
