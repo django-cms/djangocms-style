@@ -20,37 +20,31 @@ from djangocms_attributes_field.fields import AttributesField
 from cms.models import CMSPlugin
 
 
-CLASS_CHOICES = getattr(
-    settings,
-    'DJANGOCMS_STYLE_CHOICES',
-    ['container', 'content', 'teaser'],
-)
-
-TAG_CHOICES = getattr(
-    settings,
-    'DJANGOCMS_STYLE_TAGS',
-    ['div', 'article', 'section', 'header', 'footer', 'aside',
-     'hi', 'h2', 'h3', 'h4', 'h5', 'h6'],
-)
-
-# maintain deprecated settings
 if hasattr(settings, 'CMS_STYLE_NAMES'):
     CLASS_CHOICES = tuple((setting) for setting in list(settings.CMS_STYLE_NAMES))
     warnings.warn('Please change CMS_STYLE_NAMES to the new DJANGOCMS_STYLE_CHOICES.')
+else:
+    CLASS_CHOICES = getattr(
+        settings,
+        'DJANGOCMS_STYLE_CHOICES',
+        ['container', 'content', 'teaser'],
+    )
+    CLASS_CHOICES = tuple((entry, entry) for entry in CLASS_CHOICES)
+
 if hasattr(settings, 'CMS_STYLE_TAG_TYPES'):
     TAG_CHOICES = tuple((setting) for setting in list(settings.CMS_STYLE_TAG_TYPES))
     warnings.warn('Please change CMS_STYLE_TAG_TYPES to the new DJANGOCMS_STYLE_TAGS.')
+else:
+    TAG_CHOICES = getattr(
+        settings,
+        'DJANGOCMS_STYLE_TAGS',
+        ['div', 'article', 'section', 'header', 'footer', 'aside',
+         'hi', 'h2', 'h3', 'h4', 'h5', 'h6'],
+    )
+    TAG_CHOICES = tuple((entry, entry) for entry in TAG_CHOICES)
 
 CLASS_NAME_FORMAT = re.compile(r'^\w[\w_-]*$')
 TAG_TYPE_FORMAT = re.compile(r'\w[\w\d]*$')
-
-# convert into correct choice type
-def get_choices(choice):
-    if isinstance(choice, list):
-        return tuple((entry, entry) for entry in choice)
-    elif isinstance(choice, tuple):
-        return choice
-    return ()
 
 
 @python_2_unicode_compatible
@@ -66,14 +60,14 @@ class Style(CMSPlugin):
     )
     tag_type = models.CharField(
         verbose_name=_('Tag type'),
-        choices=get_choices(TAG_CHOICES),
-        default=get_choices(TAG_CHOICES)[0][0],
+        choices=TAG_CHOICES,
+        default=TAG_CHOICES[0][0],
         max_length=255,
     )
     class_name = models.CharField(
         verbose_name=_('Class name'),
-        choices=get_choices(CLASS_CHOICES),
-        default=get_choices(CLASS_CHOICES)[0][0],
+        choices=CLASS_CHOICES,
+        default=CLASS_CHOICES[0][0],
         blank=True,
         max_length=255,
     )
@@ -188,6 +182,13 @@ class Style(CMSPlugin):
             styles.append('margin-left: {0:d}px;'.format(self.margin_left))
         return ' '.join(styles)
 
+    def get_additional_classes(self):
+        if self.additional_classes:
+            # Removes any extra spaces
+            class_list = self.additional_classes.split(',')
+            return ' '.join((html_class.strip() for html_class in class_list))
+        return ''
+
     def clean(self):
         # validate for correct class name settings
         if self.additional_classes:
@@ -207,11 +208,3 @@ class Style(CMSPlugin):
                 raise ValidationError(
                     _('"{name}" is not a proper HTML tag.').format(name=self.tag_type)
                 )
-
-    @property
-    def get_additional_classes(self):
-        if self.additional_classes:
-            # Removes any extra spaces
-            class_list = self.additional_classes.split(',')
-            return ' '.join((html_class.strip() for html_class in class_list))
-        return ''

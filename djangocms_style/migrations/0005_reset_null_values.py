@@ -5,8 +5,8 @@ from django.db import migrations, models
 
 
 def reset_null_values(apps, schema_editor):
-    File = apps.get_model('djangocms_style', 'Style')
-    plugins = File.objects.all()
+    Style = apps.get_model('djangocms_style', 'Style')
+    plugins = Style.objects.all()
     plugins.filter(class_name__isnull=True).update(class_name='')
 
 
