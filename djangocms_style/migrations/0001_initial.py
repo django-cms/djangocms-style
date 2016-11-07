@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-from djangocms_style.models import CLASS_NAMES, Style
+from djangocms_style.models import CLASS_CHOICES, TAG_CHOICES
 
 class Migration(migrations.Migration):
 
@@ -15,8 +15,8 @@ class Migration(migrations.Migration):
             name='Style',
             fields=[
                 ('cmsplugin_ptr', models.OneToOneField(serialize=False, related_name='+', parent_link=True, to='cms.CMSPlugin', primary_key=True)),
-                ('class_name', models.CharField(blank=True, max_length=50, choices=CLASS_NAMES, verbose_name='class name', null=True, default=CLASS_NAMES[0][0])),
-                ('tag_type', models.CharField(verbose_name='tag Type', default=Style.HTML_TAG_TYPES[0][0], max_length=50, choices=Style.HTML_TAG_TYPES)),
+                ('class_name', models.CharField(blank=True, max_length=50, choices=CLASS_CHOICES, verbose_name='class name', null=True, default=CLASS_CHOICES[0][0])),
+                ('tag_type', models.CharField(verbose_name='tag Type', default=TAG_CHOICES[0][0], max_length=50, choices=TAG_CHOICES)),
                 ('padding_left', models.SmallIntegerField(verbose_name='padding left', blank=True, null=True)),
                 ('padding_right', models.SmallIntegerField(verbose_name='padding right', blank=True, null=True)),
                 ('padding_top', models.SmallIntegerField(verbose_name='padding top', blank=True, null=True)),

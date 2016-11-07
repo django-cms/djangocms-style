@@ -1,105 +1,210 @@
 # -*- coding: utf-8 -*-
+"""
+Enables the user to add style plugin that displays a html tag with
+the provided settings from the style plugin.
+"""
+from __future__ import unicode_literals
+
+import re
+import warnings
 
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
-from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.utils.encoding import python_2_unicode_compatible
+from django.utils.six import string_types
+from django.utils.translation import ugettext, ugettext_lazy as _
+
+from djangocms_attributes_field.fields import AttributesField
 
 from cms.models import CMSPlugin
 
 
-CLASS_NAMES = getattr(settings, "CMS_STYLE_NAMES", (
-    ('info', _("info")),
-    ('new', _("new")),
-    ('hint', _("hint"))
-))
+if hasattr(settings, 'CMS_STYLE_NAMES'):
+    CLASS_CHOICES = tuple((setting) for setting in list(settings.CMS_STYLE_NAMES))
+    warnings.warn('Please change CMS_STYLE_NAMES to the new DJANGOCMS_STYLE_CHOICES.')
+else:
+    CLASS_CHOICES = getattr(
+        settings,
+        'DJANGOCMS_STYLE_CHOICES',
+        ['container', 'content', 'teaser'],
+    )
+    CLASS_CHOICES = tuple((entry, entry) for entry in CLASS_CHOICES)
+
+if hasattr(settings, 'CMS_STYLE_TAG_TYPES'):
+    TAG_CHOICES = tuple((setting) for setting in list(settings.CMS_STYLE_TAG_TYPES))
+    warnings.warn('Please change CMS_STYLE_TAG_TYPES to the new DJANGOCMS_STYLE_TAGS.')
+else:
+    TAG_CHOICES = getattr(
+        settings,
+        'DJANGOCMS_STYLE_TAGS',
+        ['div', 'article', 'section', 'header', 'footer', 'aside',
+         'hi', 'h2', 'h3', 'h4', 'h5', 'h6'],
+    )
+    TAG_CHOICES = tuple((entry, entry) for entry in TAG_CHOICES)
+
+CLASS_NAME_FORMAT = re.compile(r'^\w[\w_-]*$')
+TAG_TYPE_FORMAT = re.compile(r'\w[\w\d]*$')
 
 
 @python_2_unicode_compatible
 class Style(CMSPlugin):
     """
-    A CSS Style Plugin
+    Renders a given ``TAG_CHOICES`` element with additional attributes
     """
+    label = models.CharField(
+        verbose_name=_('Label'),
+        blank=True,
+        max_length=255,
+        help_text=_('Overrides the display name in the structure mode.'),
+    )
+    tag_type = models.CharField(
+        verbose_name=_('Tag type'),
+        choices=TAG_CHOICES,
+        default=TAG_CHOICES[0][0],
+        max_length=255,
+    )
+    class_name = models.CharField(
+        verbose_name=_('Class name'),
+        choices=CLASS_CHOICES,
+        default=CLASS_CHOICES[0][0],
+        blank=True,
+        max_length=255,
+    )
+    additional_classes = models.CharField(
+        verbose_name=_('Additional classes'),
+        blank=True,
+        max_length=255,
+        help_text=_('Additional comma separated list of classes '
+            'to be added to the element e.g. "row, column-12, clearfix".'),
+    )
+    id_name = models.CharField(
+        verbose_name=_('ID name'),
+        blank=True,
+        max_length=255,
+    )
+    attributes = AttributesField(
+        verbose_name=_('Attributes'),
+        blank=True,
+        excluded_keys=['class', 'id', 'style'],
+    )
 
-    DIV_TAG = 'div'
-    ARTICLE_TAG = 'article'
-    SECTION_TAG = 'section'
+    padding_top = models.PositiveSmallIntegerField(
+        verbose_name=_('Padding top'),
+        blank=True,
+        null=True,
+    )
+    padding_right = models.PositiveSmallIntegerField(
+        verbose_name=_('Padding right'),
+        blank=True,
+        null=True,
+    )
+    padding_bottom = models.PositiveSmallIntegerField(
+        verbose_name=_('Padding bottom'),
+        blank=True,
+        null=True,
+    )
+    padding_left = models.PositiveSmallIntegerField(
+        verbose_name=_('Padding left'),
+        blank=True,
+        null=True,
+    )
 
-    HTML_TAG_TYPES = getattr(settings, "CMS_STYLE_TAG_TYPES", (
-        (DIV_TAG, _('div')),
-        (ARTICLE_TAG, _('article')),
-        (SECTION_TAG, _('section')),
-    ))
+    margin_top = models.PositiveSmallIntegerField(
+        verbose_name=_('Margin top'),
+        blank=True,
+        null=True,
+    )
+    margin_right = models.PositiveSmallIntegerField(
+        verbose_name=_('Margin right'),
+        blank=True,
+        null=True,
+    )
+    margin_bottom = models.PositiveSmallIntegerField(
+        verbose_name=_('Margin bottom'),
+        blank=True,
+        null=True,
+    )
+    margin_left = models.PositiveSmallIntegerField(
+        verbose_name=_('Margin left'),
+        blank=True,
+        null=True,
+    )
 
     # Add an app namespace to related_name to avoid field name clashes
     # with any other plugins that have a field with the same name as the
     # lowercase of the class name of this model.
     # https://github.com/divio/django-cms/issues/5030
     cmsplugin_ptr = models.OneToOneField(
-        CMSPlugin, related_name='djangocms_style_style', parent_link=True)
-
-    class_name = models.CharField(
-        _("class name"), choices=CLASS_NAMES, default=CLASS_NAMES[0][0],
-        max_length=50, blank=True, null=True)
-
-    tag_type = models.CharField(
-        verbose_name=_('tag Type'), max_length=50, choices=HTML_TAG_TYPES,
-        default=HTML_TAG_TYPES[0][0])
-
-    padding_left = models.SmallIntegerField(
-        _("padding left"), blank=True, null=True)
-    padding_right = models.SmallIntegerField(
-        _("padding right"), blank=True, null=True)
-    padding_top = models.SmallIntegerField(
-        _("padding top"), blank=True, null=True)
-    padding_bottom = models.SmallIntegerField(
-        _("padding bottom"), blank=True, null=True)
-
-    margin_left = models.SmallIntegerField(
-        _("margin left"), blank=True, null=True)
-    margin_right = models.SmallIntegerField(
-        _("margin right"), blank=True, null=True)
-    margin_top = models.SmallIntegerField(
-        _("margin top"), blank=True, null=True)
-    margin_bottom = models.SmallIntegerField(
-        _("margin bottom"), blank=True, null=True)
-
-    additional_classes = models.CharField(
-        verbose_name=_('additional classes'),
-        max_length=200,
-        blank=True,
-        help_text=_('Comma separated list of additional classes to apply to '
-                    'tag_type')
+        CMSPlugin,
+        related_name='%(app_label)s_%(class)s',
+        parent_link=True,
     )
 
     def __str__(self):
-        display = self.get_class_name_display() or self.tag_type or u''
-        return u"%s" % display
+        return self.label or self.tag_type or str(self.pk)
 
-    def inline_style(self):
-        style = ""
-        if self.padding_left:
-            style += "padding-left: %dpx; " % self.padding_left
-        if self.padding_right:
-            style += "padding-right: %dpx; " % self.padding_right
-        if self.padding_bottom:
-            style += "padding-bottom: %dpx; " % self.padding_bottom
+    def get_short_description(self):
+        display = self.tag_type or ''
+        # display the tag correctly
+        if self.label:
+            display = '<{0}> {1}'.format(display, self.label)
+        elif self.class_name:
+            display = '<{0}> .{1}'.format(display, self.class_name)
+        else:
+            display = '<{0}>'.format(display)
+        # display additional information
+        if self.additional_classes:
+            display = '{0} [{1}]'.format(display, self.get_additional_classes)
+        if self.id_name:
+            display = '{0} #{1}'.format(display, self.id_name)
+        return display
+
+    def get_styles(self):
+        styles = []
+        # padding values
         if self.padding_top:
-            style += "padding-top: %dpx; " % self.padding_top
-        if self.margin_left:
-            style += "margin-left: %dpx; " % self.margin_left
-        if self.margin_right:
-            style += "margin-right: %dpx; " % self.margin_right
+            styles.append('padding-top: {0:d}px;'.format(self.padding_top))
+        if self.padding_right:
+            styles.append('padding-right: {0:d}px;'.format(self.padding_right))
+        if self.padding_bottom:
+            styles.append('padding-bottom: {0:d}px;'.format(self.padding_bottom))
+        if self.padding_left:
+            styles.append('padding-left: {0:d}px;'.format(self.padding_left))
+        # margin values
         if self.margin_top:
-            style += "margin-top: %dpx; " % self.margin_top
+            styles.append('margin-top: {0:d}px;'.format(self.margin_top))
+        if self.margin_right:
+            styles.append('margin-right: {0:d}px;'.format(self.margin_right))
         if self.margin_bottom:
-            style += "margin-bottom: %dpx; " % self.margin_bottom
-        return style
+            styles.append('margin-bottom: {0:d}px;'.format(self.margin_bottom))
+        if self.margin_left:
+            styles.append('margin-left: {0:d}px;'.format(self.margin_left))
+        return ' '.join(styles)
 
-    @property
     def get_additional_classes(self):
         if self.additional_classes:
             # Removes any extra spaces
             class_list = self.additional_classes.split(',')
             return ' '.join((html_class.strip() for html_class in class_list))
         return ''
+
+    def clean(self):
+        # validate for correct class name settings
+        if self.additional_classes:
+            additional_classes = list(
+                html_class.strip() for html_class in self.additional_classes.split(',')
+            )
+            for class_name in additional_classes:
+                class_name = class_name.strip()
+                if not CLASS_NAME_FORMAT.match(class_name):
+                    raise ValidationError(
+                        _('"{name}" is not a proper CSS class name.').format(name=class_name)
+                    )
+            self.additional_classes = ', '.join(set(additional_classes))
+        # validate for correct tag type settings
+        if self.tag_type:
+            if not TAG_TYPE_FORMAT.match(self.tag_type):
+                raise ValidationError(
+                    _('"{name}" is not a proper HTML tag.').format(name=self.tag_type)
+                )

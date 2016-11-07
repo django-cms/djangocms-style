@@ -1,33 +1,47 @@
 # -*- coding: utf-8 -*-
-
 from django.utils.translation import ugettext_lazy as _
 
 from cms.plugin_pool import plugin_pool
 from cms.plugin_base import CMSPluginBase
 
-from djangocms_style.models import Style
+from .models import Style
 
 
 class StylePlugin(CMSPluginBase):
     model = Style
-    name = _("Style")
-    render_template = "cms/plugins/style.html"
+    name = _('Style')
+    render_template = 'djangocms_style/style.html'
     allow_children = True
 
     fieldsets = (
         (None, {
-            'fields': ('class_name',)
+            'fields': (
+                'label',
+                ('class_name', 'tag_type'),
+            )
         }),
-        (_('Advanced Settings'), {
+        (_('Advanced settings'), {
             'classes': ('collapse',),
             'fields': (
-                'tag_type',
                 'additional_classes',
-                ('padding_left', 'padding_right', 'padding_top',
-                 'padding_bottom'),
-                ('margin_left', 'margin_right', 'margin_top', 'margin_bottom'),
+                'id_name',
+                'attributes',
+            ),
+        }),
+        (_('Inline style settings'), {
+            'classes': ('collapse',),
+            'fields': (
+                ('padding_top', 'padding_right',
+                 'padding_bottom', 'padding_left'),
+                ('margin_top', 'margin_right',
+                 'margin_bottom', 'margin_left'),
             ),
         }),
     )
+
+    def render(self, context, instance, placeholder):
+        context['inline_styles'] = instance.get_styles()
+        return super(StylePlugin, self).render(context, instance, placeholder)
+
 
 plugin_pool.register_plugin(StylePlugin)

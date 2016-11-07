@@ -1,7 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from setuptools import setup
+from setuptools import find_packages, setup
+
 from djangocms_style import __version__
+
+
+REQUIREMENTS = [
+    'django-cms>=3.2.0',
+    'djangocms-attributes-field>=0.1.1',
+]
 
 
 CLASSIFIERS = [
@@ -12,34 +19,31 @@ CLASSIFIERS = [
     'License :: OSI Approved :: BSD License',
     'Operating System :: OS Independent',
     'Programming Language :: Python',
-    'Topic :: Communications',
-    'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-    'Topic :: Internet :: WWW/HTTP :: Dynamic Content :: Message Boards',
-    'Programming Language :: Python :: 2.6',
+    'Programming Language :: Python :: 2',
     'Programming Language :: Python :: 2.7',
+    'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.4',
+    'Programming Language :: Python :: 3.5',
+    'Topic :: Internet :: WWW/HTTP',
+    'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+    'Topic :: Software Development :: Libraries :: Application Frameworks',
+    'Topic :: Software Development :: Libraries :: Python Modules',
 ]
+
 
 setup(
     name='djangocms-style',
     version=__version__,
-    description='Style Plugin for django CMS',
+    description='Adds style plugin to django CMS',
     author='Divio AG',
     author_email='info@divio.ch',
     url='https://github.com/divio/djangocms-style',
-    packages=[
-        'djangocms_style',
-        'djangocms_style.migrations',
-        'djangocms_style.south_migrations'
-    ],
-    install_requires=[
-        'django>=1.6',
-        'django-cms>=3.0',
-    ],
-    license='LICENSE.txt',
-    platforms=['OS Independent'],
-    classifiers=CLASSIFIERS,
+    license='BSD',
     long_description=open('README.rst').read(),
+    packages=find_packages(),
     include_package_data=True,
-    zip_safe=False
+    zip_safe=False,
+    install_requires=REQUIREMENTS,
+    classifiers=CLASSIFIERS,
+    test_suite='tests.settings.run',
 )
