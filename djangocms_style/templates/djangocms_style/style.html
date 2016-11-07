@@ -1,19 +1,12 @@
-{% load cms_tags %}
-
-<{{ instance.tag_type }}
+{% load cms_tags %}<{{ instance.tag_type }}
     {% if instance.id_name %} id="{{ instance.id_name }}"{% endif %}
     {% if instance.class_name or instance.additional_classes %}class="{% spaceless %}
         {{ instance.class_name }}
         {{ instance.get_additional_classes }}
     {% endspaceless %}"{% endif %}
     {% if inline_styles %} style="{{ inline_styles }}"{% endif %}
-    {{ instance.attributes_str }}>
-    {% for plugin in instance.child_plugin_instances %}
-        {% render_plugin plugin %}
-    {% endfor %}
-</{{ instance.tag_type }}>
-
-{% comment %}
+    {{ instance.attributes_str }}>{% for plugin in instance.child_plugin_instances %}{% render_plugin plugin %}{% endfor %}</{{ instance.tag_type }}>{% comment %}
+    # The formatting of this file is very specific to remove unnecessary whitespaces
     # Available variables:
     {{ instance.label }}
     {{ instance.tag_type }}
