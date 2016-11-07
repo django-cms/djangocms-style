@@ -56,7 +56,7 @@ displayed as first options, the default choices are: ::
 
     DJANGOCMS_STYLE_CHOICES = ['container', 'content', 'teaser']
 
-You are encourage to modify that setting to your projects specifications.
+You are encouraged to modify that setting to your projects specifications.
 
 The available tags can also be configured, the default choices are: ::
 

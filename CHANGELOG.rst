@@ -6,11 +6,18 @@ Changelog
 2.0.0 (unreleased)
 ==================
 
-* Added additional settings
-* Cleaned up file structure
-* Removed Django < 1.8 support
-* Removed ``alt`` attribute and migrated data to Filer
-* Adapted ``README.txt``
+* Backwards incompatible changes
+    * Moved template from ``templates/cms/plugins/style.html`` to
+      ``templates/djangocms_style/style.html``
+    * Added setting ``DJANGOCMS_STYLE_CHOICES`` that will replace
+      ``CMS_STYLE_NAMES``
+    * Added setting ``DJANGOCMS_STYLE_TAGS`` that will replace
+      ``CMS_STYLE_TAG_TYPES``
+    * Removed Django < 1.8 support
+    * Removed ``alt`` attribute and migrated data to Filer
+* Added additional fields such as ``label``, ``id_name`` and additional
+  ``attributes``
+* Updated ``README.txt``
 
 
 1.7.0 (2016-03-04)
