@@ -145,20 +145,23 @@ class Style(CMSPlugin):
         return self.label or self.tag_type or str(self.pk)
 
     def get_short_description(self):
-        display = self.tag_type or ''
-        # display the tag correctly
+        # display format:
+        # Style label <tag> .list.of.classes #id
+        display = []
+        classes = []
+
         if self.label:
-            display = '<{0}> {1}'.format(display, self.label)
-        elif self.class_name:
-            display = '<{0}> .{1}'.format(display, self.class_name)
-        else:
-            display = '<{0}>'.format(display)
-        # display additional information
+            display.append(self.label)
+        if self.tag_type:
+            display.append('<{0}>'.format(self.tag_type))
+        if self.class_name:
+            classes.append(self.class_name)
         if self.additional_classes:
-            display = '{0} [{1}]'.format(display, self.get_additional_classes)
+            classes.extend(item.strip() for item in self.additional_classes.split(',') if item.strip())
+        display.append('.{0}'.format('.'.join(classes)))
         if self.id_name:
-            display = '{0} #{1}'.format(display, self.id_name)
-        return display
+            display.append('#{0}'.format(self.id_name))
+        return ' '.join(display)
 
     def get_styles(self):
         styles = []
@@ -181,13 +184,6 @@ class Style(CMSPlugin):
         if self.margin_left:
             styles.append('margin-left: {0:d}px;'.format(self.margin_left))
         return ' '.join(styles)
-
-    def get_additional_classes(self):
-        if self.additional_classes:
-            # Removes any extra spaces
-            class_list = self.additional_classes.split(',')
-            return ' '.join((html_class.strip() for html_class in class_list))
-        return ''
 
     def clean(self):
         # validate for correct class name settings
