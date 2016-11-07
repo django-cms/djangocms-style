@@ -1,6 +1,6 @@
 {% load cms_tags %}<{{ instance.tag_type }} {% spaceless %}
     {% endspaceless %}{% if instance.id_name %} id="{{ instance.id_name }}"{% endif %}{% spaceless %}
-    {% endspaceless %}{% if instance.class_name or instance.get_additional_classes %}class="{% spaceless %}
+    {% endspaceless %}{% if instance.class_name or instance.additional_classes %}class="{% spaceless %}
         {{ instance.class_name }}
         {{ instance.get_additional_classes }}
     {% endspaceless %}"{% endif %}{% spaceless %}
