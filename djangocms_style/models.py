@@ -163,6 +163,9 @@ class Style(CMSPlugin):
             display.append('#{0}'.format(self.id_name))
         return ' '.join(display)
 
+    def get_additional_classes(self):
+        return ' '.join(item.strip() for item in self.additional_classes.split(',') if item.strip())
+
     def get_styles(self):
         styles = []
         # padding values
