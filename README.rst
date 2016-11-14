@@ -58,6 +58,19 @@ displayed as first options, the default choices are: ::
 
 You are encouraged to modify that setting to your projects specifications.
 
+This addon provides a ``default`` template for all instances. You can provide
+additional template choices by adding a ``DJANGOCMS_STYLE_TEMPLATES``
+setting::
+
+    DJANGOCMS_STYLE_TEMPLATES = [
+        ('feature', _('Feature')),
+    ]
+
+You'll need to create the `feature` folder inside ``templates/djangocms_style/``
+otherwise you will get a *template does not exist* error. You can do this by
+copying the ``default`` folder inside that directory and renaming it to
+``feature``.
+
 The available tags can also be configured, the default choices are: ::
 
     DJANGOCMS_STYLE_TAGS = ['div', 'article', 'section', 'header', 'footer',

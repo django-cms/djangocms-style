@@ -8,7 +8,8 @@ Changelog
 
 * Backwards incompatible changes
     * Moved template from ``templates/cms/plugins/style.html`` to
-      ``templates/djangocms_style/style.html``
+      ``templates/djangocms_style/default/style.html``
+    * Added setting ``DJANGOCMS_STYLE_TEMPLATES``
     * Added setting ``DJANGOCMS_STYLE_CHOICES`` that will replace
       ``CMS_STYLE_NAMES``
     * Added setting ``DJANGOCMS_STYLE_TAGS`` that will replace
