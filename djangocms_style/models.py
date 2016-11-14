@@ -46,12 +46,30 @@ else:
 CLASS_NAME_FORMAT = re.compile(r'^\w[\w_-]*$')
 TAG_TYPE_FORMAT = re.compile(r'\w[\w\d]*$')
 
+# Add additional choices through the ``settings.py``.
+def get_templates():
+    choices = [
+        ('default', _('Default')),
+    ]
+    choices += getattr(
+        settings,
+        'DJANGOCMS_STYLE_TEMPLATES',
+        [],
+    )
+    return choices
+
 
 @python_2_unicode_compatible
 class Style(CMSPlugin):
     """
     Renders a given ``TAG_CHOICES`` element with additional attributes
     """
+    template = models.CharField(
+        verbose_name=_('Template'),
+        choices=get_templates(),
+        default=get_templates()[0][0],
+        max_length=255,
+    )
     label = models.CharField(
         verbose_name=_('Label'),
         blank=True,

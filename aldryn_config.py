@@ -7,6 +7,10 @@ def split_and_strip(string):
 
 
 class Form(forms.BaseForm):
+    templates = forms.CharField(
+        'List of additional templates (comma separated)',
+        required=False,
+    )
     class_names = forms.CharField(
         'List of classes (comma separated)',
         required=False,
@@ -20,11 +24,17 @@ class Form(forms.BaseForm):
         data = super(Form, self).clean()
 
         # prettify
+        data['templates'] = ', '.join(split_and_strip(data['templates']))
         data['class_names'] = ', '.join(split_and_strip(data['class_names']))
         data['tag_types'] = ', '.join(split_and_strip(data['tag_types']))
         return data
 
     def to_settings(self, data, settings):
+        if data['templates']:
+            settings['DJANGOCMS_STYLE_TEMPLATES'] = [
+                (item, item)
+                for item in split_and_strip(data['templates'])
+            ]
         if data['class_names']:
             settings['DJANGOCMS_STYLE_CHOICES'] = [
                 (item, item)
