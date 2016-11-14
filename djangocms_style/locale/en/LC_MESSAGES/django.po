@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-14 14:09+0100\n"
+"POT-Creation-Date: 2016-11-14 13:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,46 +17,98 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cms_plugins.py:9
+#: cms_plugins.py:12
 msgid "Style"
 msgstr ""
 
-#: cms_plugins.py:17
-msgid "Padding"
+#: cms_plugins.py:23
+msgid "Advanced settings"
 msgstr ""
 
-#: cms_plugins.py:21
-msgid "Margin"
+#: cms_plugins.py:31
+msgid "Inline style settings"
 msgstr ""
 
-#: models.py:7
-msgid "info"
+#: models.py:52
+msgid "Default"
 msgstr ""
 
-#: models.py:8
-msgid "new"
+#: models.py:68
+msgid "Template"
 msgstr ""
 
-#: models.py:9
-msgid "hint"
+#: models.py:74
+msgid "Label"
 msgstr ""
 
-#: models.py:17
-msgid "class name"
+#: models.py:77
+msgid "Overrides the display name in the structure mode."
 msgstr ""
 
-#: models.py:19 models.py:24
-msgid "left"
+#: models.py:80
+msgid "Tag type"
 msgstr ""
 
-#: models.py:20 models.py:25
-msgid "right"
+#: models.py:86
+msgid "Class name"
 msgstr ""
 
-#: models.py:21 models.py:26
-msgid "top"
+#: models.py:93
+msgid "Additional classes"
 msgstr ""
 
-#: models.py:22 models.py:27
-msgid "bottom"
+#: models.py:96
+msgid ""
+"Additional comma separated list of classes to be added to the element e.g. "
+"\"row, column-12, clearfix\"."
+msgstr ""
+
+#: models.py:100
+msgid "ID name"
+msgstr ""
+
+#: models.py:105
+msgid "Attributes"
+msgstr ""
+
+#: models.py:111
+msgid "Padding top"
+msgstr ""
+
+#: models.py:116
+msgid "Padding right"
+msgstr ""
+
+#: models.py:121
+msgid "Padding bottom"
+msgstr ""
+
+#: models.py:126
+msgid "Padding left"
+msgstr ""
+
+#: models.py:132
+msgid "Margin top"
+msgstr ""
+
+#: models.py:137
+msgid "Margin right"
+msgstr ""
+
+#: models.py:142
+msgid "Margin bottom"
+msgstr ""
+
+#: models.py:147
+msgid "Margin left"
+msgstr ""
+
+#: models.py:219
+#, python-brace-format
+msgid "\"{name}\" is not a proper CSS class name."
+msgstr ""
+
+#: models.py:226
+#, python-brace-format
+msgid "\"{name}\" is not a proper HTML tag."
 msgstr ""

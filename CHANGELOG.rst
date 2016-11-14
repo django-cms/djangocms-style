@@ -19,6 +19,7 @@ Changelog
 * Added additional fields such as ``label``, ``id_name`` and additional
   ``attributes``
 * Updated ``README.txt``
+* Updated translations
 
 
 1.7.0 (2016-03-04)
