@@ -1,63 +1,115 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
-# Translators:
-# Maxym Lynnyk <yakudzam@gmail.com>, 2013
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: django-cms\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-14 14:09+0100\n"
-"PO-Revision-Date: 2014-02-06 13:31+0000\n"
-"Last-Translator: Maxym Lynnyk <yakudzam@gmail.com>\n"
-"Language-Team: Ukrainian (http://www.transifex.com/projects/p/django-cms/language/uk/)\n"
+"POT-Creation-Date: 2016-11-14 13:15+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Angelo Dini <finalangeljp@hotmail.com>, 2016\n"
+"Language-Team: Ukrainian (https://www.transifex.com/divio/teams/58664/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: cms_plugins.py:9
+#: cms_plugins.py:12
 msgid "Style"
 msgstr "Стиль"
 
-#: cms_plugins.py:17
-msgid "Padding"
-msgstr "Padding"
+#: cms_plugins.py:23
+msgid "Advanced settings"
+msgstr ""
 
-#: cms_plugins.py:21
-msgid "Margin"
-msgstr "Margin"
+#: cms_plugins.py:31
+msgid "Inline style settings"
+msgstr ""
 
-#: models.py:7
-msgid "info"
-msgstr "інфо"
+#: models.py:52
+msgid "Default"
+msgstr ""
 
-#: models.py:8
-msgid "new"
-msgstr "новий"
+#: models.py:68
+msgid "Template"
+msgstr ""
 
-#: models.py:9
-msgid "hint"
-msgstr "підказка"
+#: models.py:74
+msgid "Label"
+msgstr ""
 
-#: models.py:17
-msgid "class name"
-msgstr "ім'я класу"
+#: models.py:77
+msgid "Overrides the display name in the structure mode."
+msgstr ""
 
-#: models.py:19 models.py:24
-msgid "left"
-msgstr "ліворуч"
+#: models.py:80
+msgid "Tag type"
+msgstr ""
 
-#: models.py:20 models.py:25
-msgid "right"
-msgstr "праворуч"
+#: models.py:86
+msgid "Class name"
+msgstr ""
 
-#: models.py:21 models.py:26
-msgid "top"
-msgstr "верх"
+#: models.py:93
+msgid "Additional classes"
+msgstr ""
 
-#: models.py:22 models.py:27
-msgid "bottom"
-msgstr "низ"
+#: models.py:96
+msgid ""
+"Additional comma separated list of classes to be added to the element e.g. "
+"\"row, column-12, clearfix\"."
+msgstr ""
+
+#: models.py:100
+msgid "ID name"
+msgstr ""
+
+#: models.py:105
+msgid "Attributes"
+msgstr ""
+
+#: models.py:111
+msgid "Padding top"
+msgstr ""
+
+#: models.py:116
+msgid "Padding right"
+msgstr ""
+
+#: models.py:121
+msgid "Padding bottom"
+msgstr ""
+
+#: models.py:126
+msgid "Padding left"
+msgstr ""
+
+#: models.py:132
+msgid "Margin top"
+msgstr ""
+
+#: models.py:137
+msgid "Margin right"
+msgstr ""
+
+#: models.py:142
+msgid "Margin bottom"
+msgstr ""
+
+#: models.py:147
+msgid "Margin left"
+msgstr ""
+
+#: models.py:219
+#, python-brace-format
+msgid "\"{name}\" is not a proper CSS class name."
+msgstr ""
+
+#: models.py:226
+#, python-brace-format
+msgid "\"{name}\" is not a proper HTML tag."
+msgstr ""
