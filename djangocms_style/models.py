@@ -39,7 +39,7 @@ else:
         settings,
         'DJANGOCMS_STYLE_TAGS',
         ['div', 'article', 'section', 'header', 'footer', 'aside',
-         'hi', 'h2', 'h3', 'h4', 'h5', 'h6'],
+         'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
     )
     TAG_CHOICES = tuple((entry, entry) for entry in TAG_CHOICES)
 
