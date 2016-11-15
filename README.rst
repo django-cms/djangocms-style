@@ -74,7 +74,7 @@ copying the ``default`` folder inside that directory and renaming it to
 The available tags can also be configured, the default choices are: ::
 
     DJANGOCMS_STYLE_TAGS = ['div', 'article', 'section', 'header', 'footer',
-                            'hi', 'h2', 'h3', 'h4', 'h5', 'h6']
+                            'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 
 NOTICE::
 

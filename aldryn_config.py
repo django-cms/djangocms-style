@@ -36,14 +36,8 @@ class Form(forms.BaseForm):
                 for item in split_and_strip(data['templates'])
             ]
         if data['class_names']:
-            settings['DJANGOCMS_STYLE_CHOICES'] = [
-                (item, item)
-                for item in split_and_strip(data['class_names'])
-            ]
+            settings['DJANGOCMS_STYLE_CHOICES'] = split_and_strip(data['class_names'])
         if data['tag_types']:
-            settings['DJANGOCMS_STYLE_TAGS'] = [
-                (item, item)
-                for item in split_and_strip(data['tag_types'])
-            ]
+            settings['DJANGOCMS_STYLE_TAGS'] = split_and_strip(data['tag_types'])
 
         return settings
