@@ -25,6 +25,7 @@ class StylePlugin(CMSPluginBase):
             'fields': (
                 'additional_classes',
                 'id_name',
+                'template',
                 'attributes',
             ),
         }),
