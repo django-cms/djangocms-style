@@ -9,7 +9,7 @@ django CMS Style
 that allows you to create a HTML container containing classes, styles, ids
 and other attributes definable through the plugins settings.
 
-This addon is compatible with `Aldryn <http://aldryn.com>`_ and is also available on the
+This addon is compatible with `Divio Cloid <http://divio.com>`_ and is also available on the
 `django CMS Marketplace <https://marketplace.django-cms.org/en/addons/browse/djangocms-style/>`_
 for easy installation.
 
