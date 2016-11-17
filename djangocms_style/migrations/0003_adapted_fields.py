@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 
 import djangocms_attributes_field.fields
+from djangocms_style.models import TAG_CHOICES
 
 
 class Migration(migrations.Migration):
@@ -76,6 +77,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='style',
             name='tag_type',
-            field=models.CharField(default='div', max_length=255, verbose_name='Tag type', choices=[('div', 'div'), ('article', 'article'), ('section', 'section'), ('header', 'header'), ('footer', 'footer'), ('aside', 'aside'), ('h1', 'h1'), ('h2', 'h2'), ('h3', 'h3'), ('h4', 'h4'), ('h5', 'h5'), ('h6', 'h6')]),
+            field=models.CharField(max_length=255, verbose_name='Tag type', choices=TAG_CHOICES, default=TAG_CHOICES[0][0])
         ),
     ]
