@@ -2,6 +2,11 @@
 Changelog
 =========
 
+(unreleased)
+============
+
+* Prevent changes to `DJANGOCMS_STYLE_XXX` settings from requiring new
+  migrations
 
 2.0.0 (2016-11-15)
 ==================

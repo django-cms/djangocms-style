@@ -1,8 +1,10 @@
 *.pyc
 *.egg-info
 .DS_Store
+.coverage
 .idea/
 .tox/
 .eggs/
 dist/
 build/
+htmlcov/
