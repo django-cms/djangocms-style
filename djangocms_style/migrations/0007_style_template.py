@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+from djangocms_style.models import get_templates
 
 
 class Migration(migrations.Migration):
@@ -14,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='style',
             name='template',
-            field=models.CharField(default='default', max_length=255, verbose_name='Template', choices=[('default', 'Default')]),
+            field=models.CharField(max_length=255, verbose_name='Template', choices=get_templates(), default=get_templates()[0][0])
         ),
     ]

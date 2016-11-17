@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-
+from djangocms_style.models import CLASS_CHOICES
 
 class Migration(migrations.Migration):
 
@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='style',
             name='class_name',
-            field=models.CharField(default='container', max_length=255, verbose_name='Class name', blank=True, choices=[('container', 'container'), ('content', 'content'), ('teaser', 'teaser')]),
+            field=models.CharField(max_length=255, verbose_name='Class name', blank=True, choices=CLASS_CHOICES, default=CLASS_CHOICES[0][0])
         ),
     ]
