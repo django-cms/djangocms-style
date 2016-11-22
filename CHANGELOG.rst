@@ -3,7 +3,7 @@ Changelog
 =========
 
 
-2.0.1 (unreleased)
+2.0.1 (2016-11-22)
 ==================
 
 * Prevent changes to ``DJANGOCMS_STYLE_XXX`` settings from requiring new
