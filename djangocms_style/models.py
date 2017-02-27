@@ -11,6 +11,7 @@ import warnings
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.utils.datastructures import OrderedSet
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.six import string_types
 from django.utils.translation import ugettext, ugettext_lazy as _
@@ -218,7 +219,7 @@ class Style(CMSPlugin):
                     raise ValidationError(
                         _('"{name}" is not a proper CSS class name.').format(name=class_name)
                     )
-            self.additional_classes = ', '.join(set(additional_classes))
+            self.additional_classes = ', '.join(OrderedSet(additional_classes))
         # validate for correct tag type settings
         if self.tag_type:
             if not TAG_TYPE_FORMAT.match(self.tag_type):
