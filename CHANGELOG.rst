@@ -3,6 +3,12 @@ Changelog
 =========
 
 
+2.0.2 (unreleased)
+==================
+
+* Ensure class ordering is maintained #36
+
+
 2.0.1 (2016-11-22)
 ==================
 
