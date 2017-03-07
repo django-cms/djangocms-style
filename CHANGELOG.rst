@@ -3,7 +3,7 @@ Changelog
 =========
 
 
-2.0.2 (unreleased)
+2.0.2 (2017-03-07)
 ==================
 
 * Ensure class ordering is maintained #36
