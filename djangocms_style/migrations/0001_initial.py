@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Style',
             fields=[
-                ('cmsplugin_ptr', models.OneToOneField(serialize=False, related_name='+', parent_link=True, to='cms.CMSPlugin', primary_key=True)),
+                ('cmsplugin_ptr', models.OneToOneField(serialize=False, related_name='+', parent_link=True, to='cms.CMSPlugin', primary_key=True, on_delete=models.CASCADE)),
                 ('class_name', models.CharField(blank=True, max_length=50, choices=CLASS_CHOICES, verbose_name='class name', null=True, default=CLASS_CHOICES[0][0])),
                 ('tag_type', models.CharField(verbose_name='tag Type', default=TAG_CHOICES[0][0], max_length=50, choices=TAG_CHOICES)),
                 ('padding_left', models.SmallIntegerField(verbose_name='padding left', blank=True, null=True)),
