@@ -4,7 +4,7 @@
         {{ instance.class_name }}
         {{ instance.get_additional_classes }}
     {% endspaceless %}"{% endif %}{% spaceless %}
-    {% endspaceless %}{% if inline_styles %} style="{{ inline_styles }}"{% endif %}{{ instance.attributes_str }}>{% for plugin in instance.child_plugin_instances %}{% render_plugin plugin %}{% endfor %}</{{ instance.tag_type }}>{% comment %}
+    {% endspaceless %}{% if inline_styles %} style="{{ inline_styles }}"{% endif %}{% if instance.attributes_str %} {{ instance.attributes_str }}{% endif %}>{% for plugin in instance.child_plugin_instances %}{% render_plugin plugin %}{% endfor %}</{{ instance.tag_type }}>{% comment %}
     # The formatting of this file is very specific to remove unnecessary whitespaces
     # Available variables:
     {{ instance.label }}

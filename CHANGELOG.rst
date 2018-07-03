@@ -2,6 +2,11 @@
 Changelog
 =========
 
+2.0.3 (unreleased)
+==================
+
+* Fixed a validation issue with attributes
+
 
 2.0.2 (2017-03-07)
 ==================
