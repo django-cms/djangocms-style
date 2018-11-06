@@ -8,17 +8,16 @@ from __future__ import unicode_literals
 import re
 import warnings
 
-from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.db import models
 from django.utils.datastructures import OrderedSet
 from django.utils.encoding import python_2_unicode_compatible
-from django.utils.six import string_types
-from django.utils.translation import ugettext, ugettext_lazy as _
-
-from djangocms_attributes_field.fields import AttributesField
+from django.utils.translation import ugettext_lazy as _
 
 from cms.models import CMSPlugin
+
+from djangocms_attributes_field.fields import AttributesField
 
 
 if hasattr(settings, 'CMS_STYLE_NAMES'):
@@ -46,6 +45,7 @@ else:
 
 CLASS_NAME_FORMAT = re.compile(r'^\w[\w_-]*$')
 TAG_TYPE_FORMAT = re.compile(r'\w[\w\d]*$')
+
 
 # Add additional choices through the ``settings.py``.
 def get_templates():
@@ -95,7 +95,7 @@ class Style(CMSPlugin):
         blank=True,
         max_length=255,
         help_text=_('Additional comma separated list of classes '
-            'to be added to the element e.g. "row, column-12, clearfix".'),
+                    'to be added to the element e.g. "row, column-12, clearfix".'),
     )
     id_name = models.CharField(
         verbose_name=_('ID name'),
@@ -158,6 +158,7 @@ class Style(CMSPlugin):
         CMSPlugin,
         related_name='%(app_label)s_%(class)s',
         parent_link=True,
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):

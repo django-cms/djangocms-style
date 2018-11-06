@@ -2,10 +2,14 @@
 Changelog
 =========
 
-2.0.3 (unreleased)
+2.1.0 (unreleased)
 ==================
 
 * Fixed a validation issue with attributes
+* Added support for Django 1.11, 2.0 and 2.1
+* Removed support for Django 1.8, 1.9, 1.10
+* Adapted testing infrastructure (tox/travis) to incorporate
+  django CMS 3.5 and 4.0
 
 
 2.0.2 (2017-03-07)

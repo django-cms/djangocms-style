@@ -4,10 +4,9 @@ from setuptools import find_packages, setup
 
 from djangocms_style import __version__
 
-
 REQUIREMENTS = [
-    'django-cms>=3.2.0',
-    'djangocms-attributes-field>=0.1.1',
+    'django-cms>=3.4.5',
+    'djangocms-attributes-field>=0.4.0',
 ]
 
 
@@ -24,6 +23,7 @@ CLASSIFIERS = [
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.4',
     'Programming Language :: Python :: 3.5',
+    'Programming Language :: Python :: 3.6',
     'Topic :: Internet :: WWW/HTTP',
     'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     'Topic :: Software Development :: Libraries :: Application Frameworks',

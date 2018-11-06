@@ -8,3 +8,4 @@
 dist/
 build/
 htmlcov/
+local.sqlite
