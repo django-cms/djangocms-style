@@ -5,6 +5,7 @@ Changelog
 2.1.1 (unreleased)
 ==================
 
+* Fixed test matrix
 * Exclude ``tests`` folder from release build
 
 
