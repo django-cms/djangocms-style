@@ -2,6 +2,12 @@
 Changelog
 =========
 
+2.1.1 (unreleased)
+==================
+
+* Exclude ``tests`` folder from release build
+
+
 2.1.0 (2018-11-08)
 ==================
 
