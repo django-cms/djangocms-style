@@ -2,8 +2,10 @@
 from __future__ import unicode_literals
 
 import django.db.models.deletion
-from django.db import models, migrations
+from django.db import migrations, models
+
 from djangocms_style.models import CLASS_CHOICES, TAG_CHOICES
+
 
 class Migration(migrations.Migration):
 
