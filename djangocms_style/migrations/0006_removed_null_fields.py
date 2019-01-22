@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+
 from djangocms_style.models import CLASS_CHOICES
 
 
