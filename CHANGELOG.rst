@@ -3,6 +3,12 @@ Changelog
 =========
 
 
+2.2.1 (unreleased)
+==================
+
+* Added more meaningful tests
+
+
 2.2.0 (2019-05-06)
 ==================
 
