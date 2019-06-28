@@ -48,7 +48,7 @@ class StyleTestCase(CMSTestCase):
         self.assertEqual(plugin.id_name, '')
 
     def test_style_rendering(self):
-        plugin = add_plugin(
+        add_plugin(
             self.page.placeholders.get(slot="content"),
             "StylePlugin",
             "en",
@@ -66,7 +66,7 @@ class StyleTestCase(CMSTestCase):
         )
 
         # now with attributes
-        plugin = add_plugin(
+        add_plugin(
             self.page.placeholders.get(slot="content"),
             "StylePlugin",
             "en",
