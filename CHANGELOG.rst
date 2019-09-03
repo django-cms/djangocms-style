@@ -3,9 +3,11 @@ Changelog
 =========
 
 
-2.2.1 (unreleased)
+2.3.0 (unreleased)
 ==================
 
+* Deprecated old ``CMS_STYLE_NAMES`` setting
+* Deprecated old ``CMS_STYLE_TAG_TYPES`` setting
 * Added further tests to raise coverage
 * Fixed smaller issues found during testing
 
