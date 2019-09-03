@@ -6,7 +6,6 @@ the provided settings from the style plugin.
 from __future__ import unicode_literals
 
 import re
-import warnings
 
 from django.conf import settings
 from django.core.exceptions import ValidationError

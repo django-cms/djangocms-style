@@ -4,8 +4,7 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from djangocms_style.models import (
-    Style,
-    get_templates, TAG_CHOICES, CLASS_CHOICES
+    CLASS_CHOICES, TAG_CHOICES, Style, get_templates,
 )
 
 
