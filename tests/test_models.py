@@ -10,12 +10,6 @@ from djangocms_style.models import (
 
 class StyleModelTestCase(TestCase):
 
-    def setUp(self):
-        pass
-
-    def tearDown(self):
-        pass
-
     def test_settings(self):
         self.assertEqual(get_templates(), [('default', 'Default')])
         settings.DJANGOCMS_STYLE_TEMPLATES = [('feature', 'Feature')]

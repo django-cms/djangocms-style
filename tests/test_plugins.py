@@ -57,7 +57,8 @@ class StyleTestCase(CMSTestCase):
 
         self.assertContains(
             response,
-            """<div class="container btn btn-default"></div>"""
+            """<div class="container btn btn-default"></div>""",
+            html=True,
         )
 
         # now with attributes
@@ -81,5 +82,6 @@ class StyleTestCase(CMSTestCase):
         # print(response.content)
         self.assertContains(
             response,
-            """<div id="get-gelp" class="container btn btn-default" data-type="custom"></div>"""
+            """<div id="get-gelp" class="container btn btn-default" data-type="custom"></div>""",
+            html=True,
         )
