@@ -1,90 +1,108 @@
 # -*- coding: utf-8 -*-
-from cms.api import add_plugin, create_page
-from cms.test_utils.testcases import CMSTestCase
+from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.test import TestCase
 
-from djangocms_style.models import Style, TAG_CHOICES, CLASS_CHOICES
+from djangocms_style.models import (
+    CLASS_CHOICES, TAG_CHOICES, Style, get_templates,
+)
 
 
-class StyleTestCase(CMSTestCase):
+class StyleModelTestCase(TestCase):
 
-    def setUp(self):
-        self.superuser = self.get_superuser()
-        self.home = create_page(
-            title="home",
-            template="page.html",
-            language="en",
-        )
-        self.home.publish("en")
-        self.page = create_page(
-            title="help",
-            template="page.html",
-            language="en",
-        )
-
-    def tearDown(self):
-        self.page.delete()
-        self.home.delete()
+    def test_settings(self):
+        self.assertEqual(get_templates(), [('default', 'Default')])
+        settings.DJANGOCMS_STYLE_TEMPLATES = [('feature', 'Feature')]
+        self.assertEqual(get_templates(), [('default', 'Default'), ('feature', 'Feature')])
+        # class choices
+        self.assertEqual(CLASS_CHOICES, (
+            ('container', 'container'),
+            ('content', 'content'),
+            ('teaser', 'teaser'),
+        ))
+        self.assertEqual(TAG_CHOICES, (
+            ('div', 'div'), ('article', 'article'),
+            ('section', 'section'), ('header', 'header'),
+            ('footer', 'footer'), ('aside', 'aside'),
+            ('h1', 'h1'), ('h2', 'h2'), ('h3', 'h3'),
+            ('h4', 'h4'), ('h5', 'h5'), ('h6', 'h6'),
+        ))
 
     def test_style_instance(self):
-        """Style instance has been created"""
         Style.objects.create(
-            tag_type='div',
+            template=get_templates()[0][0],
+            label="some label",
+            tag_type=TAG_CHOICES[1][0],
+            class_name=CLASS_CHOICES[1][0],
+            additional_classes="xs, large, blue",
+            id_name="top",
+            attributes="{'type': 'style'}",
+            padding_top=10,
+            padding_right=20,
+            padding_bottom=30,
+            padding_left=40,
         )
-        style = Style.objects.get(tag_type='div')
-        self.assertEqual(style.tag_type, 'div')
-
-    def test_style_plugin(self):
-        plugin = add_plugin(
-            self.page.placeholders.get(slot="content"),
-            "StylePlugin",
-            "en",
-            label="Style plugin",
-            additional_classes="btn btn-default",
+        instance = Style.objects.all()
+        self.assertEqual(instance.count(), 1)
+        instance = Style.objects.first()
+        self.assertEqual(instance.template, "default")
+        self.assertEqual(instance.label, "some label")
+        self.assertEqual(instance.tag_type, "article")
+        self.assertEqual(instance.class_name, "content")
+        self.assertEqual(instance.additional_classes, "xs, large, blue")
+        self.assertEqual(instance.id_name, "top")
+        self.assertEqual(instance.attributes, "{'type': 'style'}")
+        self.assertEqual(instance.padding_top, 10)
+        instance.clean()
+        # test classes
+        self.assertEqual(instance.get_additional_classes(), "xs large blue")
+        self.assertEqual(
+            instance.get_styles(),
+            "padding-top: 10px; padding-right: 20px; padding-bottom: 30px; padding-left: 40px;",
         )
-        self.assertEqual(plugin.additional_classes, "btn btn-default")
-        self.assertEqual(plugin.label, "Style plugin")
-        self.assertEqual(plugin.tag_type, TAG_CHOICES[0][0])
-        self.assertEqual(plugin.class_name, CLASS_CHOICES[0][0])
-        self.assertEqual(plugin.id_name, '')
-
-    def test_style_rendering(self):
-        add_plugin(
-            self.page.placeholders.get(slot="content"),
-            "StylePlugin",
-            "en",
-            label="Style plugin",
-            additional_classes="btn btn-default",
+        instance.padding_top, instance.padding_right = None, None
+        instance.padding_bottom, instance.padding_left = None, None
+        self.assertEqual(instance.get_styles(), "")
+        instance.clean()
+        instance.margin_top = 11
+        instance.margin_right = 21
+        instance.margin_bottom = 31
+        instance.margin_left = 41
+        self.assertEqual(
+            instance.get_styles(),
+            "margin-top: 11px; margin-right: 21px; margin-bottom: 31px; margin-left: 41px;",
         )
-        self.page.publish("en")
-
-        with self.login_user_context(self.superuser):
-            response = self.client.get(self.page.get_absolute_url('en'))
-
-        self.assertContains(
-            response,
-            """<div class="container btn btn-default"></div>"""
+        # test strings
+        self.assertEqual(str(instance), "some label")
+        self.assertEqual(
+            instance.get_short_description(),
+            "some label <article> .content .xs .large .blue #top",
         )
-
-        # now with attributes
-        add_plugin(
-            self.page.placeholders.get(slot="content"),
-            "StylePlugin",
-            "en",
-            label="Style plugin",
-            class_name=CLASS_CHOICES[0][1],
-            additional_classes="btn btn-default",
-            id_name="get-gelp",
-            attributes={
-                "data-type": "custom"
-            },
+        instance.label = None
+        self.assertEqual(str(instance), "article")
+        self.assertEqual(
+            instance.get_short_description(),
+            "<article> .content .xs .large .blue #top",
         )
-        self.page.publish("en")
-
-        with self.login_user_context(self.superuser):
-            response = self.client.get(self.page.get_absolute_url('en'))
-
-        # print(response.content)
-        self.assertContains(
-            response,
-            """<div id="get-gelp" class="container btn btn-default" data-type="custom"></div>"""
+        instance.tag_type = None
+        self.assertEqual(str(instance), "1")
+        self.assertEqual(
+            instance.get_short_description(),
+            ".content .xs .large .blue #top",
         )
+        instance.class_name = None
+        instance.additional_classes = None
+        instance.id_name = None
+        self.assertEqual(instance.get_short_description(), "",)
+        self.assertEqual(instance.get_additional_classes(), "")
+        # test clean errors
+        instance.clean()
+        instance.additional_classes = "%1up"
+        instance.tag_type = "%1up"
+        with self.assertRaises(ValidationError):
+            # is not a proper CSS class name
+            instance.clean()
+        instance.additional_classes = ""
+        with self.assertRaises(ValidationError):
+            # is not a proper HTML tag
+            instance.clean()

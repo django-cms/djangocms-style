@@ -3,10 +3,13 @@ Changelog
 =========
 
 
-2.2.1 (unreleased)
+2.3.0 (unreleased)
 ==================
 
-* Added more meaningful tests
+* Deprecated old ``CMS_STYLE_NAMES`` setting
+* Deprecated old ``CMS_STYLE_TAG_TYPES`` setting
+* Added further tests to raise coverage
+* Fixed smaller issues found during testing
 
 
 2.2.0 (2019-05-06)

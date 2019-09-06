@@ -6,7 +6,6 @@ the provided settings from the style plugin.
 from __future__ import unicode_literals
 
 import re
-import warnings
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -20,29 +19,19 @@ from cms.models import CMSPlugin
 from djangocms_attributes_field.fields import AttributesField
 
 
-if hasattr(settings, 'CMS_STYLE_NAMES'):
-    CLASS_CHOICES = tuple((setting) for setting in list(settings.CMS_STYLE_NAMES))
-    warnings.warn('Please change CMS_STYLE_NAMES to the new DJANGOCMS_STYLE_CHOICES.')
-else:
-    CLASS_CHOICES = getattr(
-        settings,
-        'DJANGOCMS_STYLE_CHOICES',
-        ['container', 'content', 'teaser'],
-    )
-    CLASS_CHOICES = tuple((entry, entry) for entry in CLASS_CHOICES)
-
-if hasattr(settings, 'CMS_STYLE_TAG_TYPES'):
-    TAG_CHOICES = tuple((setting) for setting in list(settings.CMS_STYLE_TAG_TYPES))
-    warnings.warn('Please change CMS_STYLE_TAG_TYPES to the new DJANGOCMS_STYLE_TAGS.')
-else:
-    TAG_CHOICES = getattr(
-        settings,
-        'DJANGOCMS_STYLE_TAGS',
-        ['div', 'article', 'section', 'header', 'footer', 'aside',
-         'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-    )
-    TAG_CHOICES = tuple((entry, entry) for entry in TAG_CHOICES)
-
+CLASS_CHOICES = getattr(
+    settings,
+    'DJANGOCMS_STYLE_CHOICES',
+    ['container', 'content', 'teaser'],
+)
+CLASS_CHOICES = tuple((entry, entry) for entry in CLASS_CHOICES)
+TAG_CHOICES = getattr(
+    settings,
+    'DJANGOCMS_STYLE_TAGS',
+    ['div', 'article', 'section', 'header', 'footer', 'aside',
+        'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+)
+TAG_CHOICES = tuple((entry, entry) for entry in TAG_CHOICES)
 CLASS_NAME_FORMAT = re.compile(r'^\w[\w_-]*$')
 TAG_TYPE_FORMAT = re.compile(r'\w[\w\d]*$')
 
@@ -167,8 +156,7 @@ class Style(CMSPlugin):
     def get_short_description(self):
         # display format:
         # Style label <tag> .list.of.classes #id
-        display = []
-        classes = []
+        display, classes = [], []
 
         if self.label:
             display.append(self.label)
@@ -178,13 +166,17 @@ class Style(CMSPlugin):
             classes.append(self.class_name)
         if self.additional_classes:
             classes.extend(item.strip() for item in self.additional_classes.split(',') if item.strip())
-        display.append('.{0}'.format('.'.join(classes)))
+        if classes:
+            display.append('.{0}'.format(' .'.join(classes)))
         if self.id_name:
             display.append('#{0}'.format(self.id_name))
         return ' '.join(display)
 
     def get_additional_classes(self):
-        return ' '.join(item.strip() for item in self.additional_classes.split(',') if item.strip())
+        classes = ''
+        if self.additional_classes:
+            classes = ' '.join(item.strip() for item in self.additional_classes.split(',') if item.strip())
+        return classes
 
     def get_styles(self):
         styles = []
