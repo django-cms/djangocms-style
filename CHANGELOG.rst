@@ -6,6 +6,7 @@ Changelog
 2.3.0 (unreleased)
 ==================
 
+* Added support for Django 3.0
 * Deprecated old ``CMS_STYLE_NAMES`` setting
 * Deprecated old ``CMS_STYLE_TAG_TYPES`` setting
 * Added further tests to raise coverage
