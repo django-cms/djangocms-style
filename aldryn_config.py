@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from aldryn_client import forms
 
 
@@ -21,7 +20,7 @@ class Form(forms.BaseForm):
     )
 
     def clean(self):
-        data = super(Form, self).clean()
+        data = super().clean()
 
         # prettify
         data['templates'] = ', '.join(split_and_strip(data['templates']))
