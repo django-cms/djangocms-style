@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
@@ -45,7 +44,7 @@ class StylePlugin(CMSPluginBase):
 
     def render(self, context, instance, placeholder):
         context['inline_styles'] = instance.get_styles()
-        return super(StylePlugin, self).render(context, instance, placeholder)
+        return super().render(context, instance, placeholder)
 
 
 plugin_pool.register_plugin(StylePlugin)
