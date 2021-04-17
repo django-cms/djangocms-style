@@ -7,6 +7,7 @@ from djangocms_style import __version__
 REQUIREMENTS = [
     'django-cms>=3.7',
     'djangocms-attributes-field>=1',
+    'django-treebeard>=4.3,<4.5',
 ]
 
 
