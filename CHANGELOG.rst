@@ -2,11 +2,24 @@
 Changelog
 =========
 
-Unreleased
+3.1.0 (2023-12-06)
 ==================
 
-* Removed (pinned) django-treebeard dependency
+## What's Changed
+* Add GitHub Actions by @crydotsnake in https://github.com/django-cms/djangocms-style/pull/56
+* FEATURE: adjust setup metadata by @crydotsnake in https://github.com/django-cms/djangocms-style/pull/58
+* FEATURE: add github pr template by @crydotsnake in https://github.com/django-cms/djangocms-style/pull/57
+* Removed pinned django-treebeard by @tidenhub in https://github.com/django-cms/djangocms-style/pull/59
+* Feat: Django 4.2 support by @mogoh in https://github.com/django-cms/djangocms-style/pull/61
+* chore: Improve ruff config by @marksweb in https://github.com/django-cms/djangocms-style/pull/64
 
+## New Contributors
+* @crydotsnake made their first contribution in https://github.com/django-cms/djangocms-style/pull/56
+* @tidenhub made their first contribution in https://github.com/django-cms/djangocms-style/pull/59
+* @mogoh made their first contribution in https://github.com/django-cms/djangocms-style/pull/61
+* @marksweb made their first contribution in https://github.com/django-cms/djangocms-style/pull/64
+
+**Full Changelog**: https://github.com/django-cms/djangocms-style/compare/3.0.0...3.1.0
 
 3.0.0 (2020-09-02)
 ==================
