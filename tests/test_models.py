@@ -3,7 +3,10 @@ from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from djangocms_style.models import (
-    CLASS_CHOICES, TAG_CHOICES, Style, get_templates,
+    CLASS_CHOICES,
+    TAG_CHOICES,
+    Style,
+    get_templates,
 )
 
 
