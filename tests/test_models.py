@@ -13,21 +13,21 @@ from djangocms_style.models import (
 class StyleModelTestCase(TestCase):
 
     def test_settings(self):
-        self.assertEqual(get_templates(), [('default', 'Default')])
-        settings.DJANGOCMS_STYLE_TEMPLATES = [('feature', 'Feature')]
-        self.assertEqual(get_templates(), [('default', 'Default'), ('feature', 'Feature')])
+        self.assertEqual(get_templates(), [("default", "Default")])
+        settings.DJANGOCMS_STYLE_TEMPLATES = [("feature", "Feature")]
+        self.assertEqual(get_templates(), [("default", "Default"), ("feature", "Feature")])
         # class choices
         self.assertEqual(CLASS_CHOICES, (
-            ('container', 'container'),
-            ('content', 'content'),
-            ('teaser', 'teaser'),
+            ("container", "container"),
+            ("content", "content"),
+            ("teaser", "teaser"),
         ))
         self.assertEqual(TAG_CHOICES, (
-            ('div', 'div'), ('article', 'article'),
-            ('section', 'section'), ('header', 'header'),
-            ('footer', 'footer'), ('aside', 'aside'),
-            ('h1', 'h1'), ('h2', 'h2'), ('h3', 'h3'),
-            ('h4', 'h4'), ('h5', 'h5'), ('h6', 'h6'),
+            ("div", "div"), ("article", "article"),
+            ("section", "section"), ("header", "header"),
+            ("footer", "footer"), ("aside", "aside"),
+            ("h1", "h1"), ("h2", "h2"), ("h3", "h3"),
+            ("h4", "h4"), ("h5", "h5"), ("h6", "h6"),
         ))
 
     def test_style_instance(self):

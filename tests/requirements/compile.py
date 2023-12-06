@@ -84,4 +84,4 @@ if __name__ == "__main__":
             # check=True,
             capture_output=True,
         )
-        print(output.stderr.decode('utf-8'))
+        print(output.stderr.decode("utf-8"))
