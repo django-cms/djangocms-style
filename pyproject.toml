@@ -23,7 +23,7 @@ select = [
   "UP",   # pyupgrade
   "C901", # mccabe
   "N",    # pep8-naming
-  "YTT",  # flake8-2020,
+  "YTT",  # flake8-2020
   "RUF"
 ]
 exclude = [
