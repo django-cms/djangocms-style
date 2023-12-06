@@ -39,7 +39,7 @@ class StylePlugin(CMSPluginBase):
     )
 
     def get_render_template(self, context, instance, placeholder):
-        return 'djangocms_style/{}/style.html'.format(instance.template)
+        return f'djangocms_style/{instance.template}/style.html'
 
     def render(self, context, instance, placeholder):
         context['inline_styles'] = instance.get_styles()

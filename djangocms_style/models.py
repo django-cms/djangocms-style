@@ -153,15 +153,15 @@ class Style(CMSPlugin):
         if self.label:
             display.append(self.label)
         if self.tag_type:
-            display.append('<{0}>'.format(self.tag_type))
+            display.append(f'<{self.tag_type}>')
         if self.class_name:
             classes.append(self.class_name)
         if self.additional_classes:
             classes.extend(item.strip() for item in self.additional_classes.split(',') if item.strip())
         if classes:
-            display.append('.{0}'.format(' .'.join(classes)))
+            display.append('.{}'.format(' .'.join(classes)))
         if self.id_name:
-            display.append('#{0}'.format(self.id_name))
+            display.append(f'#{self.id_name}')
         return ' '.join(display)
 
     def get_additional_classes(self):
@@ -174,22 +174,22 @@ class Style(CMSPlugin):
         styles = []
         # padding values
         if self.padding_top:
-            styles.append('padding-top: {0:d}px;'.format(self.padding_top))
+            styles.append(f'padding-top: {self.padding_top:d}px;')
         if self.padding_right:
-            styles.append('padding-right: {0:d}px;'.format(self.padding_right))
+            styles.append(f'padding-right: {self.padding_right:d}px;')
         if self.padding_bottom:
-            styles.append('padding-bottom: {0:d}px;'.format(self.padding_bottom))
+            styles.append(f'padding-bottom: {self.padding_bottom:d}px;')
         if self.padding_left:
-            styles.append('padding-left: {0:d}px;'.format(self.padding_left))
+            styles.append(f'padding-left: {self.padding_left:d}px;')
         # margin values
         if self.margin_top:
-            styles.append('margin-top: {0:d}px;'.format(self.margin_top))
+            styles.append(f'margin-top: {self.margin_top:d}px;')
         if self.margin_right:
-            styles.append('margin-right: {0:d}px;'.format(self.margin_right))
+            styles.append(f'margin-right: {self.margin_right:d}px;')
         if self.margin_bottom:
-            styles.append('margin-bottom: {0:d}px;'.format(self.margin_bottom))
+            styles.append(f'margin-bottom: {self.margin_bottom:d}px;')
         if self.margin_left:
-            styles.append('margin-left: {0:d}px;'.format(self.margin_left))
+            styles.append(f'margin-left: {self.margin_left:d}px;')
         return ' '.join(styles)
 
     def clean(self):
