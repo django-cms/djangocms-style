@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# This script requries multiple python versions to be installed.
+# This script requires multiple python versions to be installed.
 # You can use pyenv for that.
 #
 # See: https://github.com/pyenv/pyenv#installation
@@ -16,7 +16,7 @@
 # Now install python versions:
 # pyenv install 3.8 3.9 3.10 3.11
 #
-# Then activate them globaly with the systems default to be still default:
+# Then activate them globally with the systems default to be still default:
 # pyenv global system 3.11 3.10 3.9 3.8
 #
 # Also pip-tools must be installed for every version of python.
@@ -84,4 +84,4 @@ if __name__ == "__main__":
             # check=True,
             capture_output=True,
         )
-        print(output.stderr.decode('utf-8'))
+        print(output.stderr.decode("utf-8"))
