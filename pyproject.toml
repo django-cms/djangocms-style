@@ -15,8 +15,25 @@ ignore = [
 ]
 line-length = 119
 select = [
-    "I",
-    "E",
-    "F",
-    "W",
+  "E",    # pycodestyle errors
+  "W",    # pycodestyle warnings
+  "F",    # pyflakes
+  "I",    # isort
+  "FBT",  # flake8-boolean-trap
+  "B",    # flake8-bugbear
+  "C",    # flake8-comprehensions
+  "DJ",   # flake8-django
+  "INT",  # flake8-gettext
+  "PIE",  # flake8-pie
+  "Q",    # flake8-quotes
+  "SIM",  # flake8-simplify
+  "PGH",  # pygrep-hooks
+  "PLE",  # pylint error
+  "PLR",  # pylint refactor
+  "PLW",  # pylint warning
+  "UP",   # pyupgrade
+  "C901", # mccabe
+  "N",    # pep8-naming
+  "YTT",  # flake8-2020,
+  "RUF"
 ]
