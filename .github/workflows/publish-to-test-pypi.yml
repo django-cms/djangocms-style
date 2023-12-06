@@ -40,4 +40,4 @@ jobs:
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         repository-url: https://test.pypi.org/legacy/
-        skip_existing: true
+        skip-existing: true
