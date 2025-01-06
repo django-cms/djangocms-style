@@ -82,6 +82,6 @@ if __name__ == "__main__":
         output = run(
             cmd,
             # check=True,
-            capture_output=True,
+            capture_output=True, check=False,
         )
         print(output.stderr.decode("utf-8"))
