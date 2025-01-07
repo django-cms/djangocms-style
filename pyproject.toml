@@ -1,9 +1,18 @@
+[project]
+name="djangocms-style"
+version="3.1.0"
+author="Divio AG"
+author_email="info@divio.ch"
+maintainer="Django CMS Association and contributors"
+maintainer_email="info@django-cms.org"
+url="https://github.com/django-cms/djangocms-style"
+
 [tool.codespell]
 skip = '*.po'
 
 [tool.ruff]
 line-length = 119
-select = [
+lint.select = [
   "E",    # pycodestyle errors
   "W",    # pycodestyle warnings
   "F",    # pyflakes
@@ -26,18 +35,18 @@ select = [
   "YTT",  # flake8-2020
   "RUF"
 ]
-exclude = [
+lint.exclude = [
     ".env",
     ".venv",
     "**/migrations/**",
 ]
-ignore = [
+lint.ignore = [
     "E501",  # line too long
     "F403",  # 'from module import *' used; unable to detect undefined names
     "E701",  # multiple statements on one line (colon)
     "F401",  # module imported but unused
 ]
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "setup.py" = [
   "SIM115"  # Use context handler for opening files
 ]
