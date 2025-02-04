@@ -90,6 +90,6 @@ lint.ignore = [
     "F401",  # module imported but unused
 ]
 [tool.ruff.lint.per-file-ignores]
-"setup.py" = [
-  "SIM115"  # Use context handler for opening files
+"runtests.py" = [
+  "N806",  # expects variable name in lowercase
 ]
