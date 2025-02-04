@@ -1,5 +1,4 @@
 django-cms
 coverage
 django
-django-app-helper
 tox
