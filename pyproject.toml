@@ -90,6 +90,6 @@ lint.ignore = [
     "F401",  # module imported but unused
 ]
 [tool.ruff.lint.per-file-ignores]
-"runtests.py" = [
+"conftest.py" = [
   "N806",  # expects variable name in lowercase
 ]
