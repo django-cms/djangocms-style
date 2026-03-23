@@ -1,3 +1,4 @@
+import importlib.util
 import os
 
 SECRET_KEY = "djangocms-style-test"
@@ -17,14 +18,10 @@ INSTALLED_APPS = [
     "djangocms_style",
 ]
 
-try:  # V4 test?
-    import djangocms_versioning  # noqa
-
+if importlib.util.find_spec("djangocms_versioning") is not None:  # V4 test?
     INSTALLED_APPS += [
         "djangocms_versioning",
     ]
-except ImportError:  # Nope
-    pass
 
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
