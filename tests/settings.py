@@ -75,6 +75,4 @@ LANGUAGE_CODE = "en"
 
 ROOT_URLCONF = "tests.urls"
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
 CMS_CONFIRM_VERSION4 = True
